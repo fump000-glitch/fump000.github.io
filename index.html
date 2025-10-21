@@ -3,41 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>우리동네 분리수거 (전북특별자치도 版 - API)</title>
+    <title>우리동네 분리수거 (전북특별자치도 版 - 최종)</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         body { font-family: "Inter", sans-serif; background-color: #f4f7f9; }
         .result-table td, .result-table th { padding: 0.5rem 0.75rem; border: 1px solid #e5e7eb; text-align: left; font-size: 0.875rem; vertical-align: top; }
         .result-table th { background-color: #f9fafb; font-weight: 600; }
-        
-        /* AI 채팅창 (API 방식) 스타일 */
         #floating-chat-container { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
-        #ai-chat-box { 
-            width: 350px; 
-            max-height: 80vh; /* 높이 제한 */
-            display: none; /* 기본 숨김 */
-            flex-direction: column; /* 세로 정렬 */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); 
-            border-radius: 0.75rem; 
-            overflow: hidden; 
-            background-color: #fff; 
-        }
-        #chat-messages { 
-            flex-grow: 1; /* 남은 공간 차지 */
-            overflow-y: auto; /* 내용 많으면 스크롤 */
-            padding: 0.75rem; 
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem; /* 메시지 간 간격 */
-        }
+        #ai-chat-box { width: 350px; max-height: 80vh; display: none; flex-direction: column; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); border-radius: 0.75rem; overflow: hidden; background-color: #fff; }
+        #chat-messages { flex-grow: 1; overflow-y: auto; padding: 0.75rem; display: flex; flex-direction: column; gap: 0.75rem; }
         .user-message { background-color: #d1fae5; align-self: flex-end; border-bottom-right-radius: 0; padding: 0.5rem 0.75rem; border-radius: 0.5rem; max-width: 85%; font-size: 0.875rem;}
         .ai-message { background-color: #f3f4f6; align-self: flex-start; border-bottom-left-radius: 0; padding: 0.5rem 0.75rem; border-radius: 0.5rem; max-width: 85%; font-size: 0.875rem;}
-
         #chat-toggle-btn { background-color: #10b981; transition: transform 0.2s ease-in-out; }
         #chat-toggle-btn:hover { background-color: #059669; transform: scale(1.05); }
-        
-        /* 이중 아코디언 스타일 */
         details { background-color: white; border: 1px solid #e5e7eb; border-radius: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 1px 2px rgba(0,0,0,0.05); overflow: hidden; }
         summary { padding: 0.75rem 1rem; cursor: pointer; font-weight: 600; color: #374151; display: flex; justify-content: space-between; align-items: center; list-style: none; }
         summary::-webkit-details-marker { display: none; }
@@ -60,11 +38,41 @@
         <h1 class="text-4xl font-extrabold text-gray-900 mb-2 text-center">우리동네 분리수거 도우미</h1>
         <p class="text-center text-gray-500 mb-8">서비스 지역: 전북특별자치도 (14개 시/군)</p>
 
-        <div class="space-y-4 mb-8 p-6 bg-gray-50 rounded-lg border"> /* (내용 동일) */ </div>
-        <div id="disposalInfo" class="mt-8 space-y-6"> /* (내용 동일) */ </div>
-        <div class="mt-12 p-6 bg-emerald-50 rounded-xl shadow-inner"> <details> <summary> <h2 class="text-xl font-semibold text-emerald-700 flex items-center"> <i data-lucide="recycle" class="w-6 h-6 mr-2"></i> 2. 일반 분리수거 가이드(환경부 기준) </h2> </summary> <div id="generalGuide" class="content-padding"><p class="text-gray-500 text-sm">데이터 로딩 중...</p></div> </details> </div>
-        <div class="mt-8 p-6 bg-red-50 rounded-xl shadow-inner"> <details> <summary> <h2 class="text-xl font-semibold text-red-700 flex items-center"> <i data-lucide="apple" class="w-6 h-6 mr-2"></i> 3. 음식물 쓰레기 구분 (환경부 기준) </h2> </summary> <div id="foodWasteGuide" class="content-padding"><p class="text-gray-500 text-sm">데이터 로딩 중...</p></div> </details> </div>
-        <div class="mt-8 p-6 bg-yellow-50 rounded-xl shadow-inner"> <details> <summary> <h2 class="text-xl font-semibold text-yellow-700 flex items-center"> <i data-lucide="info" class="w-6 h-6 mr-2"></i> 4. 재활용 표시 기호 설명 </h2> </summary> <div id="displaySymbolsGuide" class="content-padding"><p class="text-gray-500 text-sm">데이터 로딩 중...</p></div> </details> </div>
+        <div class="space-y-4 mb-8 p-6 bg-gray-50 rounded-lg border">
+             <h2 class="text-xl font-semibold text-gray-700">1. 우리 동네 배출 요일 및 시간 찾기</h2>
+             <div class="flex flex-col md:flex-row gap-4">
+                 <input type="text" id="addressInput" placeholder="전북특별자치도 내 시/군 입력 (예: 군산시, 군산)" class="flex-grow p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500" onkeydown="if(event.key === 'Enter') handleSearch()">
+                 <button onclick="getCurrentLocation()" class="p-3 bg-emerald-600 text-white font-medium rounded-lg hover:bg-emerald-700 flex-shrink-0 flex items-center justify-center"> <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i> 현재 위치 </button>
+                 <button onclick="handleSearch()" class="p-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 flex-shrink-0"> 배출 정보 검색 </button>
+             </div>
+        </div>
+
+        <div id="disposalInfo" class="mt-8 space-y-6">
+             <div id="infoMessage" class="p-4 bg-blue-100 text-blue-800 rounded-lg border border-blue-200">
+                 <p><b>전북특별자치도 14개 시/군</b> 내 주소를 검색하거나 '현재 위치'를 눌러 배출 정보를 확인하세요.</p>
+             </div>
+        </div>
+
+        <div class="mt-12 p-6 bg-emerald-50 rounded-xl shadow-inner">
+            <details>
+                 <summary> <h2 class="text-xl font-semibold text-emerald-700 flex items-center"> <i data-lucide="recycle" class="w-6 h-6 mr-2"></i> 2. 일반 분리수거 가이드(환경부 기준) </h2> </summary>
+                 <div id="generalGuide" class="content-padding"><p class="text-gray-500 text-sm">데이터 로딩 중...</p></div>
+            </details>
+        </div>
+
+        <div class="mt-8 p-6 bg-red-50 rounded-xl shadow-inner">
+             <details>
+                 <summary> <h2 class="text-xl font-semibold text-red-700 flex items-center"> <i data-lucide="apple" class="w-6 h-6 mr-2"></i> 3. 음식물 쓰레기 구분 (환경부 기준) </h2> </summary>
+                 <div id="foodWasteGuide" class="content-padding"><p class="text-gray-500 text-sm">데이터 로딩 중...</p></div>
+            </details>
+        </div>
+
+        <div class="mt-8 p-6 bg-yellow-50 rounded-xl shadow-inner">
+             <details>
+                 <summary> <h2 class="text-xl font-semibold text-yellow-700 flex items-center"> <i data-lucide="info" class="w-6 h-6 mr-2"></i> 4. 재활용 표시 기호 설명 </h2> </summary>
+                 <div id="displaySymbolsGuide" class="content-padding"><p class="text-gray-500 text-sm">데이터 로딩 중...</p></div>
+            </details>
+        </div>
     </div>
 
     <div id="floating-chat-container">
@@ -77,9 +85,7 @@
                 <div class="ai-message">안녕하세요! 분리수거 관련 궁금한 점을 질문해 주세요.</div>
             </div>
             <div class="p-3 border-t flex gap-2">
-                <input type="text" id="aiQueryInput" placeholder="질문 입력..."
-                        class="flex-grow p-2 border border-gray-300 rounded-lg text-sm focus:ring-1 focus:ring-emerald-500"
-                        onkeydown="if(event.key === 'Enter') handleAiQuery()">
+                <input type="text" id="aiQueryInput" placeholder="질문 입력..." class="flex-grow p-2 border border-gray-300 rounded-lg text-sm focus:ring-1 focus:ring-emerald-500" onkeydown="if(event.key === 'Enter') handleAiQuery()">
                 <button onclick="handleAiQuery()" class="p-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600"><i data-lucide="send" class="w-5 h-5"></i></button>
             </div>
         </div>
@@ -89,121 +95,26 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
         // --- DATA STORE ---
-        const CSV_CONTENTS = { /* (내용 동일) */ };
+        const CSV_CONTENTS = {
+            '분리수거방법': `구분,항목,배출 방법,참고 사항\n플라스틱,플라스틱 뚜껑,"씻어서 일반 플라스틱으로 배출",색상 따라 구분 필요 없음\n플라스틱,플라스틱 용기,"씻어서 건조 후 배출",기름기 심하면 일반쓰레기\n캔,철 캔,"내용물 비우고 헹군 후 배출",녹슬지 않게 주의\n캔,알루미늄 캔,"내용물 비우고 헹군 후 찌그러뜨려 배출",부피 줄이기 권장\n유리병,소주/맥주병,"내용물 비우고 헹군 후 회수함에 배출",재사용 가능 병은 회수함\n유리병,기타 유리병,"깨지지 않게 헹구고 투명/갈색/녹색 분리 배출",깨진 병은 일반쓰레기\n종이,신문지,"이물질 제거 후 묶어서 배출",코팅된 종이는 일반쓰레기\n종이,종이박스,"테이프 제거, 펼쳐서 묶어서 배출",스테이플러 제거 시 더 좋음\n종이팩,우유팩,"헹구고 건조 후 전용함 배출",일반 종이와 혼합 금지\n비닐,비닐봉지,"깨끗이 씻고 투명/유색 구분",재질 혼합 시 일반쓰레기\n스티로폼,가전 포장 스티로폼,"이물질 제거 후 배출",음식물 오염된 것은 일반쓰레기`,
+            '환경부기준': `구분,항목\n음식물 쓰레기,"먹다 남은 밥, 국, 반찬"\n음식물 쓰레기,"채소 잎, 줄기"\n일반 쓰레기,"호두, 밤, 땅콩, 코코넛, 도토리 껍질"\n일반 쓰레기,"소·돼지·닭 등 육류 뼈"\n일반 쓰레기,"계란 껍데기"\n일반 쓰레기,"파인애플 껍질, 옥수수대, 양파 껍질"`,
+            '표시구분': `약어,영문명,한글명,특징,예시,재활용\nPET,Polyethylene Terephthalate,페트 (생수병 재질),"가볍고 투명하며 강도가 좋음. 산소 차단성이 뛰어나 음료수 병에 많이 사용됨.","생수병, 음료수병, 투명 계란판","재활용 가능 (유색은 제한)"\nHDPE,High Density Polyethylene,고밀도 폴리에틸렌 (단단한 플라스틱),"내구성이 좋고 화학약품에 강함. 불투명하며 단단한 용기에 적합.","세제통, 샴푸용기, 불투명 우유병, 장난감","재활용 가능"\nLDPE,Low Density Polyethylene,저밀도 폴리에틸렌 (비닐류),"유연하고 부드러우며 잘 늘어남. 포장용 비닐, 봉지 등에 사용됨.","비닐봉지, 택배 뽁뽁이, 위생장갑","비닐류 재활용 가능"\nPP,Polypropylene,"폴리프로필렌 (컵, 용기)","가볍고 내열성이 높아 뜨거운 음식에도 사용 가능. 단단하면서도 유연함.","배달음식 용기, 컵라면 뚜껑, 밀폐용기, 플라스틱 빨대","재활용 가능 (작은 부품은 일반쓰레기 권장)"\nPS,Polystyrene,"폴리스티렌 (스티로폼, 일회용 컵)","가볍고 단단하지만 충격에는 약함. 단열성이 좋아 일회용 컵, 스티로폼 용기에 적합.","요구르트컵, 일회용 수저, 스티로폼(EPS), 컵뚜껑","재활용 가능 (오염 시 재활용 불가)"\nPVC,Polyvinyl Chloride,"폴리염화비닐 (파이프, 장판)","단단하거나 유연하게 제작 가능. 염소 성분 포함으로 소각 시 유해가스 발생 가능.","파이프, 장판, 일부 랩","재활용 어려움"\nOTHER,Other (복합재질),아더 (혼합 플라스틱),"두 가지 이상의 재질이 섞여 있어 재질 분리가 불가능함.","칫솔, 치약 튜브, 햇반 용기, 캡슐커피","일반쓰레기 (재활용 불가)"\n비닐류,Vinyl (LDPE PP 등),비닐류,"LDPE, PP 등 얇은 필름 형태. 재질 표시가 다양할 수 있음.","과자 봉지, 라면 봉지, 커피믹스 봉지","일반쓰레기 (깨끗하면 분리배출 가능)"`,
+            '지자체링크': `시도명,시군구명,url\n전북특별자치도,전주시,https://www.jeonju.go.kr/index.9is?contentUid=ff8080818990c349018b041acc483bef\n전북특별자치도,군산시,https://www.gunsan.go.kr/main/m250\n전북특별자치도,익산시,https://www.iksan.go.kr/index.iksan?menuCd=DOM_000002015002000000\n전북특별자치도,정읍시,https://www.jeongeup.go.kr/index.jeongeup?menuCd=DOM_000000103010005000\n전북특별자치도,남원시,https://www.namwon.go.kr/depart/index.do?menuUid=ff8080818ec227cc018ecb0d1538029f\n전북특별자치도,김제시,https://www.gimje.go.kr/index.gimje?menuCd=DOM_000000106002003000\n전북특별자치도,완주군,https://www.wanju.go.kr/index.9is?contentUid=ff8080818b024d8e018b274f728f2ca7\n전북특별자치도,진안군,https://www.jinan.go.kr/index.jinan?menuCd=DOM_000000109003007003\n전북특별자치도,무주군,https://www.muju.go.kr/index.9is\n전북특별자치도,장수군,https://www.jangsu.go.kr/index.jangsu?menuCd=DOM_000000106009000000\n전북특별자치도,임실군,https://www.imsil.go.kr/index.imsil\n전북특별자치도,순창군,https://www.sunchang.go.kr/index.sunchang?menuCd=DOM_000000105004003002\n전북특별자치도,고창군,https://www.gochang.go.kr/index.gochang?menuCd=DOM_000000104004001000\n전북특별자치도,부안군,https://www.buan.go.kr/index.buan?menuCd=DOM_000000104008009000`,
+            '전북특별자치도': `시도명,시군구명,관리구역대상지역명,생활쓰레기배출방법,음식물쓰레기배출방법,재활용품배출방법,생활쓰레기배출요일,생활쓰레기배출시작시각,생활쓰레기배출종료시각,음식물쓰레기배출요일,음식물쓰레기배출시작시각,음식물쓰레기배출종료시각,재활용품배출요일,재활용품배출시작시각,재활용품배출종료시각,관리부서명,관리부서전화번호\n전북특별자치도,전주시,덕진구,종량제봉투,RFID,요일별 배출,일+월+화+수+목+금,19:00,04:00,일+월+화+수+목+금,19:00,04:00,동별 상이,19:00,04:00,자원순환과,063-281-2812\n전북특별자치도,전주시,완산구,종량제봉투,RFID,요일별 배출,일+월+화+수+목+금,19:00,04:00,일+월+화+수+목+금,19:00,04:00,동별 상이,19:00,04:00,자원순환과,063-281-2813\n전북특별자치도,군산시,나운동,종량제봉투,RFID,요일별 배출,월+수+금,20:00,03:00,월+수+금,20:00,03:00,화+목+일,20:00,03:00,자원순환과,063-454-3433\n전북특별자치도,군산시,소룡동,종량제봉투,RFID,요일별 배출,월+수+금,20:00,03:00,월+수+금,20:00,03:00,화+목+일,20:00,03:00,자원순환과,063-454-3433\n전북특별자치도,익산시,익산시 전지역,종량제봉투,전용용기,요일별 배출,일+월+화+수+목,18:00,24:00,일+월+화+수+목,18:00,24:00,동별 상이,18:00,24:00,청소행정과,063-859-5411\n전북특별자치도,정읍시,정읍시 전지역,종량제봉투,RFID,요일별 배출,월+수+금,19:00,02:00,월+수+금,19:00,02:00,화+목+일,19:00,02:00,자원순환과,063-539-5412\n전북특별자치도,남원시,남원시 전지역,종량제봉투,전용용기,요일별 배출,일+월+화+수+목,19:00,04:00,일+월+화+수+목,19:00,04:00,동별 상이,19:00,04:00,환경과,063-620-6413\n전북특별자치도,김제시,김제시 전지역,종량제봉투,RFID,요일별 배출,월+수+금,19:00,03:00,월+수+금,19:00,03:00,화+목+일,19:00,03:00,자원순환과,063-540-3414\n전북특별자치도,완주군,완주군 전지역,종량제봉투,전용용기,요일별 배출,일+월+화+수+목,19:00,24:00,일+월+화+수+목,19:00,24:00,동별 상이,19:00,24:00,환경과,063-290-2415\n전북특별자치도,진안군,진안군 전지역,종량제봉투,RFID,요일별 배출,월+수+금,19:00,02:00,월+수+금,19:00,02:00,화+목+일,19:00,02:00,환경과,063-430-2416\n전북특별자치도,무주군,무주군 전지역,종량제봉투,전용용기,요일별 배출,일+월+화+수+목,19:00,24:00,일+월+화+수+목,19:00,24:00,동별 상이,19:00,24:00,환경과,063-320-2417\n전북특별자치도,장수군,장수군 전지역,종량제봉투,RFID,요일별 배출,월+수+금,19:00,02:00,월+수+금,19:00,02:00,화+목+일,19:00,02:00,환경과,063-350-2418\n전북특별자치도,임실군,임실군 전지역,종량제봉투,전용용기,요일별 배출,일+월+화+수+목,19:00,24:00,일+월+화+수+목,19:00,24:00,동별 상이,19:00,24:00,환경과,063-640-2419\n전북특별자치도,순창군,순창군 전지역,종량제봉투,RFID,요일별 배출,월+수+금,19:00,02:00,월+수+금,19:00,02:00,화+목+일,19:00,02:00,환경과,063-650-1420\n전북특별자치도,고창군,고창군 전지역,종량제봉투,전용용기,요일별 배출,일+월+화+수+목,19:00,24:00,일+월+화+수+목,19:00,24:00,동별 상이,19:00,24:00,환경과,063-560-2421\n전북특별자치도,부안군,부안군 전지역,종량제봉투,RFID,요일별 배출,월+수+금,19:00,02:00,월+수+금,19:00,02:00,화+목+일,19:00,02:00,환경과,063-580-4422`
+        };
+
         const dataStore = {};
         let JEONBUK_CITIES_LIST = []; 
-        
-        // *** Gemini API 설정 추가 ***
         const API_URL_TEXT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
-        const API_KEY = "AIzaSyD06Ea2CGbQtLTwFPayf9Z6C-0Jbg651UM"; // API 키
+        const API_KEY = "AIzaSyD06Ea2CGbQtLTwFPayf9Z6C-0Jbg651UM"; 
 
-        // === 모든 함수 정의 (전역 스코프) ===
+        // === 모든 함수 정의 (*** 전역 스코프 ***) ===
 
-        function parseCSV(text) { /* (내용 동일) */ }
-        function loadData() { /* (내용 동일) */ }
-        function displayDisposalInfo(results, address) { /* (내용 동일, 시각 정보 포함) */ }
-        function displayGeneralGuide() { /* (내용 동일, 이중 아코디언) */ }
-        function displayFoodWasteGuide() { /* (내용 동일, 이중 아코디언) */ }
-        function displaySymbolsGuide() { /* (내용 동일, 이중 아코디언) */ }
-        function searchRegionalData(address) { /* (12.html 방식으로 복구된 내용) */ }
-        function handleSearch() { /* (자동완성 제거된 내용) */ }
-        // 자동완성 함수 제거
-        async function getCurrentLocation() { /* (내용 동일) */ }
-
-        // *** AI 채팅 토글 (API 방식 UI용으로 수정) ***
-        function toggleChat() {
-            const chatBox = document.getElementById('ai-chat-box');
-            const btn = document.getElementById('chat-toggle-btn');
-            const isHidden = chatBox.style.display === 'none' || chatBox.style.display === '';
-
-            // flex로 변경해야 내부 요소들이 제대로 보임
-            chatBox.style.display = isHidden ? 'flex' : 'none'; 
-            btn.innerHTML = isHidden ? `<i data-lucide="x" class="w-7 h-7"></i>` : `<i data-lucide="message-square" class="w-7 h-7"></i>`;
-            safeCreateIcons();
-             // 채팅창 열 때 메시지 맨 아래로 스크롤
-             if (isHidden) {
-                 const messages = document.getElementById('chat-messages');
-                 messages.scrollTop = messages.scrollHeight;
-             }
-        }
-        
-        // *** AI API 호출 함수 추가 ***
-        async function callGeminiAPI(query) {
-            const systemPrompt = "당신은 한국의 분리수거 전문가 챗봇입니다. 사용자의 질문에 친절하고 정확하게, 한국어로 간결한 한 단락으로 답하세요.";
-            const finalUrl = `${API_URL_TEXT}?key=${API_KEY}`;
-            const payload = {
-                contents: [{ parts: [{ text: query }] }],
-                systemInstruction: { parts: [{ text: systemPrompt }] },
-            };
-            try {
-                const response = await fetch(finalUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                if (!response.ok) throw new Error(`API call failed: ${response.status}`);
-                const result = await response.json();
-                return result.candidates?.[0]?.content?.parts?.[0]?.text || "죄송합니다. AI가 답변을 생성하지 못했습니다.";
-            } catch (error) {
-                console.error("Gemini API Error:", error);
-                return "죄송합니다. AI 서버 연결에 문제가 발생했습니다.";
-            }
-        }
-
-        // *** AI 채팅 전송 핸들러 함수 추가 ***
-        async function handleAiQuery() {
-            const input = document.getElementById('aiQueryInput');
-            const query = input.value.trim();
-            if (!query) return;
-
-            const chatMessages = document.getElementById('chat-messages');
-            const appendMessage = (sender, text) => {
-                const div = document.createElement('div');
-                // text-sm 클래스 제거 (기본 크기 사용)
-                div.className = `p-2 rounded-lg max-w-[85%] ${sender === 'user' ? 'user-message' : 'ai-message'}`; 
-                div.innerHTML = text.replace(/\n/g, '<br>'); // 줄바꿈 처리
-                chatMessages.appendChild(div);
-                chatMessages.scrollTop = chatMessages.scrollHeight; // 새 메시지 추가 후 스크롤
-            };
-
-            appendMessage('user', query);
-            input.value = '';
-            input.disabled = true; // 응답 기다리는 동안 비활성화
-            
-            // 로딩 메시지 추가
-            const loadingDiv = document.createElement('div');
-            loadingDiv.id = 'ai-loading';
-            loadingDiv.className = 'ai-message italic text-gray-500';
-            loadingDiv.innerText = 'AI가 답변을 생성 중입니다...';
-            chatMessages.appendChild(loadingDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
-            const responseText = await callGeminiAPI(query);
-            
-            // 로딩 메시지 제거하고 실제 응답 추가
-            document.getElementById('ai-loading')?.remove(); 
-            appendMessage('ai', responseText);
-            
-            input.disabled = false; // 다시 활성화
-            input.focus();
-        }
-
-
-        function safeCreateIcons() { if (window.lucide) { lucide.createIcons(); } }
-        
-        // --- 페이지 로드 시 초기화 ---
-        document.addEventListener('DOMContentLoaded', function() {
-            loadData(); 
-            safeCreateIcons(); 
-        });
-
-        // --- (함수 정의 내용 간결화를 위해 생략된 부분 복원) ---
-        // (parseCSV, loadData, display... 함수들 정의 포함됨)
         function parseCSV(text) { if (!text) return []; const lines = text.trim().split('\n'); if (lines.length < 2) return []; const headers = lines[0].split(',').map(h => h.trim()); return lines.slice(1).map(line => { const values = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || []; return headers.reduce((obj, header, i) => { obj[header] = (values[i] || '').trim().replace(/"/g, ''); return obj; }, {}); }); }
-        function loadData() { for (const key in CSV_CONTENTS) { dataStore[key] = parseCSV(CSV_CONTENTS[key]); } if (dataStore['전북특별자치도']) { const citySet = new Set(dataStore['전북특별자치도'].map(item => item['시군구명'])); JEONBUK_CITIES_LIST = Array.from(citySet); } displayGeneralGuide(); displayFoodWasteGuide(); displaySymbolsGuide(); }
-        function displayDisposalInfo(results, address) { const infoDiv = document.getElementById('disposalInfo'); infoDiv.innerHTML = ''; if (results.length === 0) { infoDiv.innerHTML = `<div class="p-4 bg-red-100 text-red-800 border-red-200 rounded-lg"><h3 class="text-xl font-bold mb-2 flex items-center"><i data-lucide="x-circle" class="w-5 h-5 mr-2"></i> 검색 결과 없음</h3><p>입력하신 <b>'${address}'</b>에 대한 정보를 찾을 수 없습니다. <b>전북특별자치도 14개 시/군</b> 내 지역인지 확인해주세요.</p></div>`; safeCreateIcons(); return; } let html = ''; for (const data of results) { if (data.isLinkOnly) { html += `<div class="p-4 bg-yellow-100 text-yellow-800 border-yellow-200 rounded-lg"><h3 class="text-xl font-bold mb-2 flex items-center"><i data-lucide="alert-triangle" class="w-5 h-5 mr-2"></i> ${data['시군구명']} 공식 링크</h3><p>상세 배출 정보는 없지만, <b>${data['시군구명']}</b>의 공식 페이지에서 정보를 확인 할 수 있습니다.</p><a href="${data['url']}" target="_blank" class="text-blue-600 hover:underline font-semibold flex items-center mt-2"><i data-lucide="external-link" class="w-4 h-4 mr-1"></i> ${data['시군구명']} 쓰레기 배출 안내 페이지</a></div>`; } else { const cleanDays = (days) => (days || '정보 없음').replace(/\+/g, ', '); const contact = data['관리부서전화번호'] ? `<a href="tel:${data['관리부서전화번호']}" class="text-blue-600 hover:underline">${data['관리부서전화번호']}</a>` : '정보 없음'; const linkData = dataStore['지자체링크']; const linkMatch = linkData.find(l => l['시군구명'] === data['시군구명']); const officialLink = linkMatch ? `<p class="text-sm mt-2"><a href="${linkMatch.url}" target="_blank" rel="noopener noreferrer" class="font-semibold text-blue-600 hover:underline">공식 지자체 안내 페이지 바로가기</a></p>` : ''; const subTitle = data['관리구역대상지역명'].includes('전역') || data['관리구역대상지역명'].includes('전지역') ? '' : `(${data['관리구역대상지역명']})`; const formatTime = (time) => time ? time : '정보 없음'; html += `<div class="p-4 bg-green-100 text-green-800 border-green-200 rounded-lg space-y-4"><h3 class="text-xl font-bold flex items-center"><i data-lucide="check-circle" class="w-5 h-5 mr-2"></i> ${data['시군구명']} ${subTitle} 배출 정보</h3><div class="result-table overflow-x-auto"><table class="w-full table-fixed"><thead class="bg-gray-200/50"><tr><th class="w-1/6">구분</th><th class="w-1/4">배출 요일</th><th class="w-1/6">시작</th><th class="w-1/6">종료</th><th class="w-1/4">배출 방법</th></tr></thead><tbody><tr><td class="font-semibold">생활</td><td>${cleanDays(data['생활쓰레기배출요일'])}</td><td>${formatTime(data['생활쓰레기배출시작시각'])}</td><td>${formatTime(data['생활쓰레기배출종료시각'])}</td><td>${data['생활쓰레기배출방법'] || '정보 없음'}</td></tr><tr><td class="font-semibold">음식물</td><td>${cleanDays(data['음식물쓰레기배출요일'])}</td><td>${formatTime(data['음식물쓰레기배출시작시각'])}</td><td>${formatTime(data['음식물쓰레기배출종료시각'])}</td><td>${data['음식물쓰레기배출방법'] || '정보 없음'}</td></tr><tr><td class="font-semibold">재활용</td><td>${cleanDays(data['재활용품배출요일'])}</td><td>${formatTime(data['재활용품배출시작시각'])}</td><td>${formatTime(data['재활용품배출종료시각'])}</td><td>${data['재활용품배출방법'] || '정보 없음'}</td></tr></tbody></table></div><div class="mt-4 p-3 bg-white rounded-lg border text-gray-700"><p class="text-sm"><b>관리 부서:</b> ${data['관리부서명'] || '정보 없음'} | <b>연락처:</b> ${contact}</p>${officialLink}</div></div>`; } } infoDiv.innerHTML = html; safeCreateIcons(); }
-        function displayGeneralGuide() { const guideDiv = document.getElementById('generalGuide'); const data = dataStore['분리수거방법']; if (!data || data.length === 0) { guideDiv.innerHTML = '<p class="text-red-500 text-sm">가이드 데이터를 불러오지 못했습니다.</p>'; return; } let html = ''; const categories = data.reduce((acc, item) => { const category = item['구분'] || '기타'; if (!acc[category]) acc[category] = []; acc[category].push(item); return acc; }, {}); for (const category in categories) { html += `<details><summary><span>${category}</span></summary><div class="content-padding space-y-2">`; categories[category].forEach(item => { html += `<details><summary><span>${item['항목']}</span></summary><div class="guide-item-content"><p><b>배출 방법:</b> ${item['배출 방법']}</p><p><b>참고 사항:</b> ${item['참고 사항'] || '없음'}</p></div></details>`; }); html += `</div></details>`; } guideDiv.innerHTML = html; safeCreateIcons(); }
-        function displayFoodWasteGuide() { const guideDiv = document.getElementById('foodWasteGuide'); const data = dataStore['환경부기준']; if (!data || data.length === 0) { guideDiv.innerHTML = '<p class="text-red-500 text-sm">가이드 데이터를 불러오지 못했습니다.</p>'; return; } const food = data.filter(item => item['구분']?.includes('음식물')); const general = data.filter(item => item['구분']?.includes('일반')); const createList = (items) => `<ul>${items.map(item => `<li>${item['항목']}</li>`).join('')}</ul>`; let html = `<details><summary><span><i data-lucide="thumbs-up" class="w-5 h-5 inline-block mr-2 text-green-700"></i>음식물 쓰레기</span></summary><div class="content-padding">${createList(food)}</div></details><details><summary><span><i data-lucide="trash-2" class="w-5 h-5 inline-block mr-2 text-red-700"></i>일반 쓰레기</span></summary><div class="content-padding">${createList(general)}</div></details>`; guideDiv.innerHTML = html; safeCreateIcons(); }
-        function displaySymbolsGuide() { const guideDiv = document.getElementById('displaySymbolsGuide'); const data = dataStore['표시구분']; if (!data || data.length === 0) { guideDiv.innerHTML = '<p class="text-red-500 text-sm">표시 구분 데이터를 불러오지 못했습니다.</p>'; return; } let html = ''; data.forEach(item => { html += `<details><summary><span>${item['약어']} (${item['한글명']})</span></summary><div class="symbol-content"><strong>${item['영문명']}</strong><br>${item['특징']}<br><strong>예시:</strong> ${item['예시']}<br><strong>재활용:</strong> ${item['재활용']}</div></details>`; }); guideDiv.innerHTML = html; safeCreateIcons(); }
-        function searchRegionalData(address) { const regionData = dataStore['전북특별자치도']; if (!regionData) return []; const matches = regionData.filter(item => address.includes(item['시군구명']) || item['시군구명'].startsWith(address)); if (matches.length > 0) return matches; const linkData = dataStore['지자체링크']; const linkMatch = linkData.find(l => address.includes(l['시군구명'])); if (linkMatch) return [{ isLinkOnly: true, ...linkMatch }]; return []; }
-        async function getCurrentLocation() { const infoDiv = document.getElementById('disposalInfo'); infoDiv.innerHTML = `<div class="p-4 bg-yellow-100 text-yellow-800 rounded-lg">위치 정보를 가져오는 중...</div>`; if (!navigator.geolocation) { infoDiv.innerHTML = `<div class="p-4 bg-red-100 text-red-800 rounded-lg">이 브라우저는 위치 정보 기능을 지원하지 않습니다.</div>`; return; } try { const pos = await new Promise((resolve, reject) => { navigator.geolocation.getCurrentPosition(resolve, reject, { enableHighAccuracy: true, timeout: 10000 }); }); const lat = pos.coords.latitude; const lon = pos.coords.longitude; const kakaoApiKey = '338f060fb335bc71e86b290a133aaaaa'; const url = `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${lon}&y=${lat}&input_coord=WGS84`; const response = await fetch(url, { headers: { 'Authorization': `KakaoAK ${kakaoApiKey}` } }); const data = await response.json(); if (!data.documents || data.documents.length === 0) { infoDiv.innerHTML = `<div class="p-4 bg-red-100 text-red-800 rounded-lg">주소 변환에 실패했습니다.</div>`; return; } const address = data.documents[0].address.region_2depth_name; if (!data.documents[0].address.region_1depth_name.includes('전북')) { infoDiv.innerHTML = `<div class="p-4 bg-red-100 text-red-800 rounded-lg"><b>서비스 지역이 아닙니다.</b><br>현재 위치(${address})는 전북특별자치도 14개 시/군 내가 아닙니다.</div>`; return; } document.getElementById('addressInput').value = address; handleSearch(); } catch (error) { console.error("위치 정보 오류:", error); infoDiv.innerHTML = `<div class="p-4 bg-red-100 text-red-800 rounded-lg">위치 정보를 가져오는 중 오류가 발생했습니다. (권한을 허용했는지 확인하세요)</div>`; } }
-
-    </script>
-</body>
-</html>
+        
+        function loadData() {
+            for (const key in CSV_CONTENTS) { dataStore[key] = parseCSV(CSV_CONTENTS[key]); } 
+            if (dataStore['전북특별자치도']) { const citySet = new Set(dataStore['전북특별자치도'].map(item => item['시군구명'])); JEONBUK_CITIES_LIST = Array.from(citySet); } 
+            displayGeneralGuide(); 
+            displayFoodWasteGuide(); 
+            display
