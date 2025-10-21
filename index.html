@@ -105,10 +105,10 @@
 
         const dataStore = {};
         let JEONBUK_CITIES_LIST = [];
-        // *** Gemini API 설정 (오타 수정됨) ***
-        const API_URL_TEXT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
-        const API_KEY = "AIzaSyD06Ea2CGbQtLTwFPayf9Z6C-0Jbg651UM";
+      
 
+        const API_URL_TEXT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent'; 
+        const API_KEY = "AIzaSyD06Ea2CGbQtLTwFPayf9Z6C-0Jbg651UM"; 
         // === 모든 함수 정의 (*** 전역 스코프 ***) ===
 
         function parseCSV(text) { if (!text) return []; const lines = text.trim().split('\n'); if (lines.length < 2) return []; const headers = lines[0].split(',').map(h => h.trim()); return lines.slice(1).map(line => { const values = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || []; return headers.reduce((obj, header, i) => { obj[header] = (values[i] || '').trim().replace(/"/g, ''); return obj; }, {}); }); }
@@ -152,3 +152,4 @@
     </script>
 </body>
 </html>
+
