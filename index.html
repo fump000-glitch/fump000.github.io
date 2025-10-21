@@ -106,9 +106,12 @@
 
         const dataStore = {};
         let JEONBUK_CITIES_LIST = []; 
-        // *** Gemini API 설정 (오타 수정됨) ***
-        const API_URL_TEXT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+    
+         const API_URL_TEXT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent';
+        // FIX: Gemini API 키를 직접 삽입하여 로컬 환경 오류 해결
         const API_KEY = "AIzaSyD06Ea2CGbQtLTwFPayf9Z6C-0Jbg651UM"; 
+        const API_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta/models';
+        const GEMINI_MODEL = 'gemini-2.5-flash-preview-05-20';
 
         // === 모든 함수 정의 (*** 전역 스코프 ***) ===
 
@@ -152,3 +155,4 @@
     </script>
 </body>
 </html>
+
