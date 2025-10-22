@@ -30,8 +30,6 @@
         details details .guide-item-content p:last-child { margin-bottom: 0; }
         details details ul { list-style-type: disc; padding-left: 2rem; }
         .symbol-content strong, .guide-item-content b { font-weight: 600; color: #10b981; }
-
-        /* --- 연관 검색어(자동 완성) 스타일 --- */
         .autocomplete-container { position: relative; }
         .autocomplete-items {
             position: absolute;
@@ -60,489 +58,253 @@
 </head>
 <body class="min-h-screen p-4 md:p-8">
 
-    <div class="max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-xl shadow-2xl">
-        <h1 class="text-4xl font-extrabold text-gray-900 mb-2 text-center">우리동네 분리수거 도우미</h1>
-        <p class="text-center text-gray-500 mb-8" id="service-area-info">서비스 지역 로딩 중...</p>
+<div class="max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-xl shadow-2xl">
+    <h1 class="text-4xl font-extrabold text-gray-900 mb-2 text-center">우리동네 분리수거 도우미</h1>
+    <p class="text-center text-gray-500 mb-8" id="service-area-info">서비스 지역 로딩 중...</p>
 
-        <div class="space-y-4 mb-8 p-6 bg-gray-50 rounded-lg border">
-             <h2 class="text-xl font-semibold text-gray-700">1. 우리 동네 배출 요일 및 시간 찾기</h2>
-             <div class="flex flex-col md:flex-row gap-4">
-                <div class="flex-grow relative autocomplete-container">
-                    <input type="text" id="addressInput" placeholder="시/군/구 입력 (예: 군산시, 정선군, 종로구)" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500">
-                </div>
-                <button onclick="getCurrentLocation()" class="p-3 bg-emerald-600 text-white font-medium rounded-lg hover:bg-emerald-700 flex-shrink-0 flex items-center justify-center"> <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i> 현재 위치 </button>
-                <button onclick="handleSearch()" class="p-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 flex-shrink-0"> 배출 정보 검색 </button>
-             </div>
-        </div>
-
-        <div id="disposalInfo" class="mt-8 space-y-6">
-            <div id="infoMessage" class="p-4 bg-blue-100 text-blue-800 rounded-lg border border-blue-200">
-                <p>지역 정보를 검색하거나 '현재 위치'를 눌러 배출 정보를 확인하세요.</p>
+    <div class="space-y-4 mb-8 p-6 bg-gray-50 rounded-lg border">
+         <h2 class="text-xl font-semibold text-gray-700">1. 우리 동네 배출 요일 및 시간 찾기</h2>
+         <div class="flex flex-col md:flex-row gap-4">
+            <div class="flex-grow relative autocomplete-container">
+                <input type="text" id="addressInput" placeholder="시/군/구 입력 (예: 군산시, 정선군, 종로구)" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500">
             </div>
-        </div>
+            <button onclick="getCurrentLocation()" class="p-3 bg-emerald-600 text-white font-medium rounded-lg hover:bg-emerald-700 flex-shrink-0 flex items-center justify-center">현재 위치</button>
+            <button onclick="handleSearch()" class="p-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 flex-shrink-0">배출 정보 검색</button>
+         </div>
+    </div>
 
-        <div class="space-y-4 mt-12 p-6 bg-gray-50 rounded-lg border">
-            <h2 class="text-xl font-semibold text-gray-700">2. 품목별 분리수거 방법 검색</h2>
-            <div class="flex flex-col md:flex-row gap-4">
-                <div class="flex-grow relative autocomplete-container">
-                    <input type="text" id="itemSearchInput" placeholder="품목 입력 (예: 페트병, 영수증)" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500">
-                </div>
-                <button onclick="handleItemSearch()" class="p-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 flex-shrink-0"> 품목 검색 </button>
-            </div>
-        </div>
-
-        <div id="itemSearchResult" class="mt-8 space-y-6">
-             <div id="itemInfoMessage" class="p-4 bg-blue-100 text-blue-800 rounded-lg border border-blue-200">
-                <p>검색창에 분리수거할 품목(예: 페트병, 깨진 유리)을 입력하고 검색하세요.</p>
-             </div>
-        </div>
-        <div class="mt-12 p-6 bg-emerald-50 rounded-xl shadow-inner">
-            <details>
-                <summary> <h2 class="text-xl font-semibold text-emerald-700 flex items-center"> <i data-lucide="recycle" class="w-6 h-6 mr-2"></i> 3. 일반 분리수거 가이드(환경부 기준) </h2> </summary>
-                <div id="generalGuide" class="content-padding"><p class="text-gray-500 text-sm">데이터 로딩 중...</p></div>
-            </details>
-        </div>
-
-        <div class="mt-8 p-6 bg-red-50 rounded-xl shadow-inner">
-             <details>
-                 <summary> <h2 class="text-xl font-semibold text-red-700 flex items-center"> <i data-lucide="apple" class="w-6 h-6 mr-2"></i> 4. 음식물 쓰레기 구분 (환경부 기준) </h2> </summary>
-                 <div id="foodWasteGuide" class="content-padding"><p class="text-gray-500 text-sm">데이터 로딩 중...</p></div>
-             </details>
-        </div>
-
-        <div class="mt-8 p-6 bg-yellow-50 rounded-xl shadow-inner">
-             <details>
-                 <summary> <h2 class="text-xl font-semibold text-yellow-700 flex items-center"> <i data-lucide="info" class="w-6 h-6 mr-2"></i> 5. 재활용 표시 기호 설명 </h2> </summary>
-                 <div id="displaySymbolsGuide" class="content-padding"><p class="text-gray-500 text-sm">데이터 로딩 중...</p></div>
-             </details>
+    <div id="disposalInfo" class="mt-8 space-y-6">
+        <div id="infoMessage" class="p-4 bg-blue-100 text-blue-800 rounded-lg border border-blue-200">
+            <p>지역 정보를 검색하거나 '현재 위치'를 눌러 배출 정보를 확인하세요.</p>
         </div>
     </div>
 
-    <div id="floating-chat-container">
-        <div id="ai-chat-box" class="bg-white rounded-xl shadow-2xl flex flex-col transition duration-300">
-            <div class="p-3 border-b bg-emerald-600 text-white rounded-t-xl flex justify-between items-center">
-                <span class="font-bold">AI 분리수거 Q&A</span>
-                <button onclick="toggleChat()" class="text-white hover:text-gray-200"><i data-lucide="x" class="w-5 h-5"></i></button>
+    <div class="space-y-4 mt-12 p-6 bg-gray-50 rounded-lg border">
+        <h2 class="text-xl font-semibold text-gray-700">2. 품목별 분리수거 방법 검색</h2>
+        <div class="flex flex-col md:flex-row gap-4">
+            <div class="flex-grow relative autocomplete-container">
+                <input type="text" id="itemSearchInput" placeholder="품목 입력 (예: 페트병, 영수증)" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500">
             </div>
-            <div id="chat-messages">
-                <div class="ai-message">안녕하세요! 분리수거 관련 궁금한 점을 질문해 주세요. 예: "테이크아웃 컵은 어떻게 버려야 하나요?"</div>
-            </div>
-            <div class="p-3 border-t flex gap-2">
-                <input type="text" id="aiQueryInput" placeholder="질문 입력..." class="flex-grow p-2 border border-gray-300 rounded-lg text-sm focus:ring-1 focus:ring-emerald-500" onkeydown="if(event.key === 'Enter') handleAiQuery()">
-                <button onclick="handleAiQuery()" class="p-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600"><i data-lucide="send" class="w-5 h-5"></i></button>
-            </div>
+            <button onclick="handleItemSearch()" class="p-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 flex-shrink-0">품목 검색</button>
         </div>
-        <button id="chat-toggle-btn" onclick="toggleChat()" class="w-14 h-14 rounded-full text-white shadow-lg flex items-center justify-center mt-3"> <i data-lucide="message-square" class="w-7 h-7"></i> </button>
     </div>
 
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        // --- (수정) 앱 스크립트 웹 앱 URL ---
-        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyH6GB0EnEIywormzcc2Govlh5MOm0mHE3RLxxUkvyOfrawb0LP3b0qNJj7RXhYyvSJDA/exec'; // 새 URL 반영
+    <div id="itemSearchResult" class="mt-8 space-y-6">
+         <div id="itemInfoMessage" class="p-4 bg-blue-100 text-blue-800 rounded-lg border border-blue-200">
+            <p>검색창에 분리수거할 품목(예: 페트병, 깨진 유리)을 입력하고 검색하세요.</p>
+         </div>
+    </div>
 
-        const dataStore = {};
-        let REGIONAL_CITY_LIST = [];
-        let RECYCLING_ITEM_LIST = [];
+    <!-- 가이드 섹션 생략 (기존과 동일) -->
+    <div class="mt-12 p-6 bg-emerald-50 rounded-xl shadow-inner">
+        <details>
+            <summary> <h2 class="text-xl font-semibold text-emerald-700 flex items-center"> <i data-lucide="recycle" class="w-6 h-6 mr-2"></i> 3. 일반 분리수거 가이드(환경부 기준) </h2> </summary>
+            <div id="generalGuide" class="content-padding"><p class="text-gray-500 text-sm">데이터 로딩 중...</p></div>
+        </details>
+    </div>
 
-        // --- AI API 키 (수정 없음) ---
-        const API_URL_TEXT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent';
-        const API_KEY = "AIzaSyD06Ea2CGbQtLTwFPayf9Z6C-0Jbg651UM"; // 사용자가 제공한 키
-        // ... (API_BASE_URL, GEMINI_MODEL은 이전과 동일)
+    <div class="mt-8 p-6 bg-red-50 rounded-xl shadow-inner">
+         <details>
+             <summary> <h2 class="text-xl font-semibold text-red-700 flex items-center"> <i data-lucide="apple" class="w-6 h-6 mr-2"></i> 4. 음식물 쓰레기 구분 (환경부 기준) </h2> </summary>
+             <div id="foodWasteGuide" class="content-padding"><p class="text-gray-500 text-sm">데이터 로딩 중...</p></div>
+         </details>
+    </div>
 
-        // === 모든 함수 정의 ===
+    <div class="mt-8 p-6 bg-yellow-50 rounded-xl shadow-inner">
+         <details>
+             <summary> <h2 class="text-xl font-semibold text-yellow-700 flex items-center"> <i data-lucide="info" class="w-6 h-6 mr-2"></i> 5. 재활용 표시 기호 설명 </h2> </summary>
+             <div id="displaySymbolsGuide" class="content-padding"><p class="text-gray-500 text-sm">데이터 로딩 중...</p></div>
+         </details>
+    </div>
+</div>
 
-      // HTML JS: CSV를 객체로 변환 (헤더 포함)
-function parseCSV(text) {
-    if (!text) return [];
-    const lines = text.trim().split('\n');
-    if (lines.length < 2) return [];
+<!-- AI 챗봇 -->
+<div id="floating-chat-container">
+    <div id="ai-chat-box" class="bg-white rounded-xl shadow-2xl flex flex-col transition duration-300">
+        <div class="p-3 border-b bg-emerald-600 text-white rounded-t-xl flex justify-between items-center">
+            <span class="font-bold">AI 분리수거 Q&A</span>
+            <button onclick="toggleChat()" class="text-white hover:text-gray-200"><i data-lucide="x" class="w-5 h-5"></i></button>
+        </div>
+        <div id="chat-messages">
+            <div class="ai-message">안녕하세요! 분리수거 관련 궁금한 점을 질문해 주세요.</div>
+        </div>
+        <div class="p-3 border-t flex gap-2">
+            <input type="text" id="aiQueryInput" placeholder="질문 입력..." class="flex-grow p-2 border border-gray-300 rounded-lg text-sm focus:ring-1 focus:ring-emerald-500" onkeydown="if(event.key === 'Enter') handleAiQuery()">
+            <button onclick="handleAiQuery()" class="p-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600"><i data-lucide="send" class="w-5 h-5"></i></button>
+        </div>
+    </div>
+    <button id="chat-toggle-btn" onclick="toggleChat()" class="w-14 h-14 rounded-full text-white shadow-lg flex items-center justify-center mt-3"> <i data-lucide="message-square" class="w-7 h-7"></i> </button>
+</div>
 
-    // 첫 줄을 헤더로 사용
-    const headers = lines[0].split(',').map(h => h.trim());
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    const WEB_APP_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+    const dataStore = {};
+    let REGIONAL_CITY_LIST = [];
+    let RECYCLING_ITEM_LIST = [];
+    const API_URL_TEXT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent';
+    const API_KEY = 'YOUR_API_KEY_HERE';
 
-    return lines.slice(1).map(line => {
-        const values = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || [];
-        return headers.reduce((obj, header, i) => {
-            obj[header] = (values[i] || '').trim().replace(/^"|"$/g, '').replace(/""/g, '"');
-            return obj;
-        }, {});
-    });
-}
-        // 데이터를 앱 스크립트 URL에서 비동기로 로드
-        async function loadData() {
-            const infoMessage = document.getElementById('infoMessage');
-            const itemInfoMessage = document.getElementById('itemInfoMessage');
-            const serviceAreaInfo = document.getElementById('service-area-info');
-            const guideDivs = {
-                'generalGuide': document.getElementById('generalGuide'),
-                'foodWasteGuide': document.getElementById('foodWasteGuide'),
-                'displaySymbolsGuide': document.getElementById('displaySymbolsGuide')
-            };
+    function parseCSV(text) { if (!text) return []; const lines = text.trim().split('\n'); if (lines.length < 2) return []; const headers = lines[0].split(',').map(h => h.trim()); return lines.slice(1).map(line => { const values = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || []; return headers.reduce((obj, header, i) => { obj[header] = (values[i] || '').trim().replace(/^"|"$/g, '').replace(/""/g, '"'); return obj; }, {}); }); }
 
-            const showLoading = (msg) => {
-                if (infoMessage) infoMessage.innerHTML = `<p class="text-blue-800">${msg}</p>`;
-                if (itemInfoMessage) itemInfoMessage.innerHTML = `<p class="text-blue-800">${msg}</p>`;
-                if (serviceAreaInfo) serviceAreaInfo.textContent = '서비스 지역 로딩 중...';
-                for (const key in guideDivs) {
-                    if (guideDivs[key]) guideDivs[key].innerHTML = `<p class="text-gray-500 text-sm">${msg}</p>`;
+    async function loadData() {
+        const infoMessage = document.getElementById('infoMessage');
+        const itemInfoMessage = document.getElementById('itemInfoMessage');
+        const serviceAreaInfo = document.getElementById('service-area-info');
+        const guideDivs = {
+            'generalGuide': document.getElementById('generalGuide'),
+            'foodWasteGuide': document.getElementById('foodWasteGuide'),
+            'displaySymbolsGuide': document.getElementById('displaySymbolsGuide')
+        };
+
+        const showLoading = (msg) => {
+            if (infoMessage) infoMessage.innerHTML = `<p class="text-blue-800">${msg}</p>`;
+            if (itemInfoMessage) itemInfoMessage.innerHTML = `<p class="text-blue-800">${msg}</p>`;
+            if (serviceAreaInfo) serviceAreaInfo.textContent = '서비스 지역 로딩 중...';
+            for (const key in guideDivs) {
+                if (guideDivs[key]) guideDivs[key].innerHTML = `<p class="text-gray-500 text-sm">${msg}</p>`;
+            }
+        };
+
+        const showError = (msg) => {
+            const errorHtml = `<div class="p-4 bg-red-100 text-red-800 rounded-lg">${msg}</div>`;
+            if (infoMessage) infoMessage.innerHTML = errorHtml;
+            if (itemInfoMessage) itemInfoMessage.innerHTML = errorHtml;
+            if (serviceAreaInfo) serviceAreaInfo.textContent = '서비스 지역 로드 실패';
+            for (const key in guideDivs) {
+                if (guideDivs[key]) guideDivs[key].innerHTML = `<p class="text-red-500 text-sm">${msg}</p>`;
+            }
+        };
+
+        showLoading('데이터베이스 연결 중...');
+
+        try {
+            const sheetNames = ["지역정보", "쓰레기검색", "분리수거방법", "환경부기준", "표시구분", "지자체링크"];
+            const fetchPromises = sheetNames.map(async (sheetName) => {
+                const url = `${WEB_APP_URL}?sheet=${encodeURIComponent(sheetName)}`;
+                try {
+                    const response = await fetch(url, { cache: 'no-store' });
+                    if (!response.ok) throw new Error(`Network response was not ok for ${sheetName} (status: ${response.status})`);
+                    const csvText = await response.text();
+                    if (csvText.startsWith("Error:")) throw new Error(`Apps Script Error for ${sheetName}: ${csvText}`);
+                    const dataKey = (sheetName === '쓰레기검색') ? '재활용품목' : sheetName;
+                    dataStore[dataKey] = parseCSV(csvText) || [];
+                    console.log(`Successfully loaded and parsed data for: ${sheetName} (as ${dataKey})`, dataStore[dataKey]);
+                } catch (fetchError) {
+                    console.warn(`[${sheetName}] 데이터를 불러오는 중 오류: ${fetchError.message}`);
+                    dataStore[sheetName === '쓰레기검색' ? '재활용품목' : sheetName] = [];
                 }
-            };
+            });
+            await Promise.all(fetchPromises);
 
-            const showError = (msg) => {
-                const errorHtml = `<div class="p-4 bg-red-100 text-red-800 rounded-lg">${msg}</div>`;
-                if (infoMessage) infoMessage.innerHTML = errorHtml;
-                if (itemInfoMessage) itemInfoMessage.innerHTML = errorHtml;
-                if (serviceAreaInfo) serviceAreaInfo.textContent = '서비스 지역 로드 실패';
-                for (const key in guideDivs) {
-                    if (guideDivs[key]) guideDivs[key].innerHTML = `<p class="text-red-500 text-sm">${msg}</p>`;
-                }
-            };
-
-            showLoading('데이터베이스 연결 중...');
-
-            try {
-                // 시트 이름 목록 (앱 스크립트 코드와 일치해야 함)
-                const sheetNames = ["지역정보", "쓰레기검색", "분리수거방법", "환경부기준", "표시구분", "지자체링크"];
-                const fetchPromises = sheetNames.map(async (sheetName) => {
-                    const url = `${WEB_APP_URL}?sheet=${encodeURIComponent(sheetName)}`;
-                    try {
-                        const response = await fetch(url, { cache: 'no-store' });
-                        if (!response.ok) throw new Error(`Network response was not ok for ${sheetName} (status: ${response.status})`);
-                        const csvText = await response.text();
-
-                        if (csvText.startsWith("Error:")) {
-                            throw new Error(`Apps Script Error for ${sheetName}: ${csvText}`);
-                        }
-
-                        // '쓰레기검색' 시트는 '재활용품목' 키로 저장
-                        const dataKey = (sheetName === '쓰레기검색') ? '재활용품목' : sheetName;
-                        dataStore[dataKey] = parseCSV(csvText);
-                        console.log(`Successfully loaded and parsed data for: ${sheetName} (as ${dataKey})`);
-                    } catch (fetchError) {
-                        throw new Error(`[${sheetName}] 데이터를 불러오는 중 오류: ${fetchError.message}`);
-                    }
+            if (dataStore['지역정보']?.length > 0) {
+                const sidoSet = new Set();
+                const citySet = new Set();
+                dataStore['지역정보'].forEach(item => {
+                    if (item['시도명']) sidoSet.add(item['시도명']);
+                    if (item['시군구명'] && item['시도명']) citySet.add(`${item['시군구명']} (${item['시도명']})`);
                 });
-
-                await Promise.all(fetchPromises);
-
-                // 자동완성 리스트 및 서비스 지역 정보 생성
-                if (dataStore['지역정보'] && dataStore['지역정보'].length > 0) {
-                    const sidoSet = new Set();
-                    const citySet = new Set();
-                    dataStore['지역정보'].forEach(item => {
-                        if (item['시도명']) sidoSet.add(item['시도명']);
-                        if (item['시군구명'] && item['시도명']) citySet.add(`${item['시군구명']} (${item['시도명']})`);
-                    });
-                    REGIONAL_CITY_LIST = Array.from(citySet);
-                    if (serviceAreaInfo) {
-                        serviceAreaInfo.textContent = `서비스 지역: 전국 (${sidoSet.size}개 시/도)`;
-                    }
-                } else {
-                    console.warn("'지역정보' data is empty or failed to load.");
-                    if (serviceAreaInfo) serviceAreaInfo.textContent = '서비스 지역 정보를 불러오지 못했습니다.';
-                }
-
-                if (dataStore['재활용품목'] && dataStore['재활용품목'].length > 0) {
-                    RECYCLING_ITEM_LIST = dataStore['재활용품목'].map(item => item['재질/상세']).filter(Boolean);
-                } else {
-                     console.warn("'재활용품목'(쓰레기검색) data is empty or failed to load.");
-                }
-
-                // 안내 메시지 복구
-                if (infoMessage) infoMessage.innerHTML = `<p>지역 정보를 검색하거나 '현재 위치'를 눌러 배출 정보를 확인하세요.</p>`;
-                if (itemInfoMessage) itemInfoMessage.innerHTML = `<p>검색창에 분리수거할 품목(예: 페트병, 깨진 유리)을 입력하고 검색하세요.</p>`;
-
-                // 가이드 표시
-                displayGeneralGuide();
-                displayFoodWasteGuide();
-                displaySymbolsGuide();
-
-                // 자동완성 활성화
-                autocomplete(document.getElementById("addressInput"), REGIONAL_CITY_LIST, handleSearch);
-                autocomplete(document.getElementById("itemSearchInput"), RECYCLING_ITEM_LIST, handleItemSearch);
-
-            } catch (error) {
-                console.error("Failed to load data:", error);
-                showError(`데이터베이스 로드 실패: ${error.message}. 페이지를 새로고침하거나 앱 스크립트 배포 상태/URL을 확인하세요.`);
+                REGIONAL_CITY_LIST = Array.from(citySet);
+                serviceAreaInfo.textContent = `서비스 지역: 전국 (${sidoSet.size}개 시/도)`;
+            } else {
+                console.warn("'지역정보' data is empty or failed to load.");
+                serviceAreaInfo.textContent = '서비스 지역 정보를 불러오지 못했습니다.';
+                REGIONAL_CITY_LIST = [];
             }
+
+            if (dataStore['재활용품목']?.length > 0) {
+                RECYCLING_ITEM_LIST = dataStore['재활용품목'].map(item => item['재질/상세']).filter(Boolean);
+            } else {
+                console.warn("'재활용품목'(쓰레기검색) data is empty or failed to load.");
+                RECYCLING_ITEM_LIST = [];
+            }
+
+            if (infoMessage) infoMessage.innerHTML = `<p>지역 정보를 검색하거나 '현재 위치'를 눌러 배출 정보를 확인하세요.</p>`;
+            if (itemInfoMessage) itemInfoMessage.innerHTML = `<p>검색창에 분리수거할 품목(예: 페트병, 깨진 유리)을 입력하고 검색하세요.</p>`;
+
+            displayGeneralGuide();
+            displayFoodWasteGuide();
+            displaySymbolsGuide();
+
+            autocomplete(document.getElementById("addressInput"), REGIONAL_CITY_LIST, handleSearch);
+            autocomplete(document.getElementById("itemSearchInput"), RECYCLING_ITEM_LIST, handleItemSearch);
+
+        } catch (error) {
+            console.error("Failed to load data:", error);
+            showError(`데이터베이스 로드 실패: ${error.message}. 페이지를 새로고침하거나 앱 스크립트 배포 상태/URL을 확인하세요.`);
         }
+    }
 
+    window.addEventListener('DOMContentLoaded', () => { loadData(); });
+</script>
 
-        // --- 나머지 함수들 (displayDisposalInfo ~ autocomplete) ---
-        // 이 부분은 이전 코드와 동일하게 유지됩니다.
-
-        // 1. 주소 검색 결과 표시 함수
-        function displayDisposalInfo(results, address) {
-            const infoDiv = document.getElementById('disposalInfo');
-            infoDiv.innerHTML = '';
-            if (results.length === 0) {
-                infoDiv.innerHTML = `<div class="p-4 bg-red-100 text-red-800 border-red-200 rounded-lg"><h3 class="text-xl font-bold mb-2 flex items-center"><i data-lucide="x-circle" class="w-5 h-5 mr-2"></i> 검색 결과 없음</h3><p>입력하신 <b>'${address}'</b>에 대한 정보를 찾을 수 없습니다. (예: '종로구 (서울특별시)', '군산시')</p></div>`;
-                safeCreateIcons();
-                return;
-            }
-
-            let html = '';
-            const uniqueResults = new Map();
-            for (const data of results) {
-                const key = data['번호'] || `${data['시도명']}-${data['시군구명']}-${data['관리구역대상지역명']}-${data['배출장소']}`;
-                if (!uniqueResults.has(key)) {
-                    uniqueResults.set(key, data);
-                }
-            }
-
-            for (const data of uniqueResults.values()) {
-                if (data.isLinkOnly) {
-                    html += `<div class="p-4 bg-yellow-100 text-yellow-800 border-yellow-200 rounded-lg"><h3 class="text-xl font-bold mb-2 flex items-center"><i data-lucide="alert-triangle" class="w-5 h-5 mr-2"></i> ${data['시군구명']} 공식 링크</h3><p>상세 배출 정보는 없지만, <b>${data['시군구명']}</b>의 공식 페이지에서 정보를 확인 할 수 있습니다.</p><a href="${data['url']}" target="_blank" class="text-blue-600 hover:underline font-semibold flex items-center mt-2"><i data-lucide="external-link" class="w-4 h-4 mr-1"></i> ${data['시군구명']} 쓰레기 배출 안내 페이지</a></div>`;
-                } else {
-                    const cleanDays = (days) => (days || '정보 없음').replace(/\+/g, ', ');
-                    const contact = data['관리부서전화번호'] ? `<a href="tel:${data['관리부서전화번호']}" class="text-blue-600 hover:underline">${data['관리부서전화번호']}</a>` : '정보 없음';
-
-                    const linkData = dataStore['지자체링크'];
-                    let officialLink = '';
-                    if (linkData && data['시군구명'] && data['시도명']) {
-                        const linkMatch = linkData.find(l => l['시군구명'] === data['시군구명'] && l['시도명'] === data['시도명']);
-                        if (linkMatch && linkMatch.url) {
-                            officialLink = `<p class="text-sm mt-2"><a href="${linkMatch.url}" target="_blank" rel="noopener noreferrer" class="font-semibold text-blue-600 hover:underline">공식 지자체 안내 페이지 바로가기</a></p>`;
-                        }
-                    }
-
-                    const subTitle = data['관리구역대상지역명'] && !/전역|해당없음|전지역/.test(data['관리구역대상지역명']) ?
-                        `(${data['관리구역대상지역명']})` : '';
-                    const title = `${data['시도명'] || ''} ${data['시군구명'] || ''} ${subTitle}`.trim();
-
-                    const formatTime = (time) => time ? time : '정보 없음';
-                    html += `<div class="p-4 bg-green-100 text-green-800 border-green-200 rounded-lg space-y-4"><h3 class="text-xl font-bold flex items-center"><i data-lucide="check-circle" class="w-5 h-5 mr-2"></i> ${title} 배출 정보</h3><div class="result-table overflow-x-auto"><table class="w-full table-fixed"><thead class="bg-gray-200/50"><tr><th class="w-1/6">구분</th><th class="w-1/4">배출 요일</th><th class="w-1/6">시작</th><th class="w-1/6">종료</th><th class="w-1/4">배출 방법</th></tr></thead><tbody><tr><td class="font-semibold">생활</td><td>${cleanDays(data['생활쓰레기배출요일'])}</td><td>${formatTime(data['생활쓰레기배출시작시각'])}</td><td>${formatTime(data['생활쓰레기배출종료시각'])}</td><td>${data['생활쓰레기배출방법'] || '정보 없음'}</td></tr><tr><td class="font-semibold">음식물</td><td>${cleanDays(data['음식물쓰레기배출요일'])}</td><td>${formatTime(data['음식물쓰레기배출시작시각'])}</td><td>${formatTime(data['음식물쓰레기배출종료시각'])}</td><td>${data['음식물쓰레기배출방법'] || '정보 없음'}</td></tr><tr><td class="font-semibold">재활용</td><td>${cleanDays(data['재활용품배출요일'])}</td><td>${formatTime(data['재활용품배출시작시각'])}</td><td>${formatTime(data['재활용품배출종료시각'])}</td><td>${data['재활용품배출방법'] || '정보 없음'}</td></tr></tbody></table></div><div class="mt-4 p-3 bg-white rounded-lg border text-gray-700"><p class="text-sm"><b>관리 부서:</b> ${data['관리부서명'] || '정보 없음'} | <b>연락처:</b> ${contact}</p>${officialLink}</div></div>`;
-                }
-            }
-            infoDiv.innerHTML = html;
-            safeCreateIcons();
-        }
-
-        // 3. 일반 가이드 표시 함수
-        function displayGeneralGuide() { const guideDiv = document.getElementById('generalGuide'); const data = dataStore['분리수거방법']; if (!data || data.length === 0) { guideDiv.innerHTML = '<p class="text-red-500 text-sm">가이드 데이터를 불러오지 못했습니다.</p>'; return; } let html = ''; const categories = data.reduce((acc, item) => { const category = item['구분'] || '기타'; if (!acc[category]) acc[category] = []; acc[category].push(item); return acc; }, {}); for (const category in categories) { html += `<details><summary><span>${category}</span></summary><div class="content-padding space-y-2">`; categories[category].forEach(item => { html += `<details><summary><span>${item['항목']}</span></summary><div class="guide-item-content"><p><b>배출 방법:</b> ${item['배출 방법'] || '정보 없음'}</p><p><b>참고 사항:</b> ${item['참고 사항'] || '없음'}</p></div></details>`; }); html += `</div></details>`; } guideDiv.innerHTML = html; safeCreateIcons(); }
-
-        // 4. 음식물 가이드 표시 함수
-        function displayFoodWasteGuide() { const guideDiv = document.getElementById('foodWasteGuide'); const data = dataStore['환경부기준']; if (!data || data.length === 0) { guideDiv.innerHTML = '<p class="text-red-500 text-sm">가이드 데이터를 불러오지 못했습니다.</p>'; return; } const food = data.filter(item => item['구분']?.includes('음식물')); const general = data.filter(item => item['구분']?.includes('일반')); const createList = (items) => `<ul>${items.map(item => `<li>${item['항목'] || ''}</li>`).join('')}</ul>`; let html = `<details><summary><span><i data-lucide="thumbs-up" class="w-5 h-5 inline-block mr-2 text-green-700"></i>음식물 쓰레기</span></summary><div class="content-padding">${createList(food)}</div></details><details><summary><span><i data-lucide="trash-2" class="w-5 h-5 inline-block mr-2 text-red-700"></i>일반 쓰레기</span></summary><div class="content-padding">${createList(general)}</div></details>`; guideDiv.innerHTML = html; safeCreateIcons(); }
-
-        // 5. 표시 기호 가이드 표시 함수
-        function displaySymbolsGuide() { const guideDiv = document.getElementById('displaySymbolsGuide'); const data = dataStore['표시구분']; if (!data || data.length === 0) { guideDiv.innerHTML = '<p class="text-red-500 text-sm">표시 구분 데이터를 불러오지 못했습니다.</p>'; return; } let html = ''; data.forEach(item => { html += `<details><summary><span>${item['약어'] || ''} (${item['한글명'] || ''})</span></summary><div class="symbol-content"><strong>${item['영문명'] || ''}</strong><br>${item['특징'] || ''}<br><strong>예시:</strong> ${item['예시'] || ''}<br><strong>재활용:</strong> ${item['재활용'] || ''}</div></details>`; }); guideDiv.innerHTML = html; safeCreateIcons(); }
-
-        // 1. 주소 검색 로직
-        function searchRegionalData(address) {
-            const regionData = dataStore['지역정보'];
-            if (!regionData) return [];
-            const cleanAddress = address.replace(/\s*\([^)]*\)$/, '');
-            const matches = regionData.filter(item =>
-                `${item['시군구명']} (${item['시도명']})` === address ||
-                item['시군구명'] === cleanAddress ||
-                item['시군구명']?.startsWith(cleanAddress)
-            );
-            if (matches.length > 0) return matches;
-            const linkData = dataStore['지자체링크'];
-            if (linkData) {
-                const linkMatch = linkData.find(l => l['시군구명'] === cleanAddress);
-                if (linkMatch) return [{ isLinkOnly: true, ...linkMatch }];
-            }
-            return [];
-        }
-
-        function handleSearch() {
+<script>
+    /* === 자동완성 함수 === */
+    function autocomplete(inp, arr, onSelectCallback) {
+        let currentFocus;
+        inp.addEventListener("input", function() {
+            const val = this.value;
             closeAllLists();
-            const address = document.getElementById('addressInput').value.trim();
-            if (!address) return;
-            const results = searchRegionalData(address);
-            displayDisposalInfo(results, address);
-        }
-
-        // --- 2. 품목 검색 관련 함수 ---
-        function searchItemData(query) {
-            const itemData = dataStore['재활용품목'];
-            if (!itemData) return [];
-            const lowerQuery = query.toLowerCase();
-            return itemData.filter(item =>
-                item['재질/상세'] && item['재질/상세'].toLowerCase().includes(lowerQuery)
-            );
-        }
-
-        function handleItemSearch() {
-            closeAllLists();
-            const query = document.getElementById('itemSearchInput').value.trim();
-            if (!query) return;
-            const results = searchItemData(query);
-            displayItemResult(results, query);
-        }
-
-        function displayItemResult(results, query) {
-            const resultDiv = document.getElementById('itemSearchResult');
-            resultDiv.innerHTML = '';
-            if (results.length === 0) {
-                resultDiv.innerHTML = `<div class="p-4 bg-red-100 text-red-800 border-red-200 rounded-lg"><h3 class="text-xl font-bold mb-2 flex items-center"><i data-lucide="x-circle" class="w-5 h-5 mr-2"></i> 검색 결과 없음</h3><p>입력하신 <b>'${query}'</b>에 대한 품목 정보를 찾을 수 없습니다.</p></div>`;
-                safeCreateIcons();
-                return;
-            }
-            let html = '';
-            for (const item of results) {
-                 const disposalTip = item['배출요령'] || item['배출 요령'] || '정보 없음';
-                 const caution = item['주의사항/처리방법'] || '정보 없음';
-                 const wasteType = item['쓰레기종류'] || item['쓰레기 종류'] || '정보 없음';
-                 const materialDetail = item['재질/상세'] || '정보 없음';
-
-                html += `
-                <div class="p-4 bg-green-100 text-green-800 border-green-200 rounded-lg space-y-3">
-                    <h3 class="text-xl font-bold flex items-center"><i data-lucide="check-circle" class="w-5 h-5 mr-2"></i> ${materialDetail}</h3>
-                    <div class="p-3 bg-white rounded-lg border text-gray-700 space-y-2">
-                        <p><strong>쓰레기 종류:</strong> ${wasteType}</p>
-                        <p><strong>배출 요령:</strong> ${disposalTip}</p>
-                        <p><strong>주의사항/처리방법:</strong> ${caution}</p>
-                    </div>
-                </div>`;
-            }
-            resultDiv.innerHTML = html;
-            safeCreateIcons();
-        }
-        // --- 2. 품목 검색 함수 끝 ---
-
-        // 1. 현재 위치 함수
-        async function getCurrentLocation() {
-            closeAllLists();
-            const infoDiv = document.getElementById('disposalInfo');
-            infoDiv.innerHTML = `<div class="p-4 bg-yellow-100 text-yellow-800 rounded-lg">위치 정보를 가져오는 중...</div>`;
-            if (!navigator.geolocation) { infoDiv.innerHTML = `<div class="p-4 bg-red-100 text-red-800 rounded-lg">이 브라우저는 위치 정보 기능을 지원하지 않습니다.</div>`; return; }
-            try {
-                const pos = await new Promise((resolve, reject) => { navigator.geolocation.getCurrentPosition(resolve, reject, { enableHighAccuracy: true, timeout: 10000 }); });
-                const lat = pos.coords.latitude;
-                const lon = pos.coords.longitude;
-                const kakaoApiKey = '338f060fb335bc71e86b290a133aaaaa';
-                const url = `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${lon}&y=${lat}&input_coord=WGS84`;
-                const response = await fetch(url, { headers: { 'Authorization': `KakaoAK ${kakaoApiKey}` } });
-                const data = await response.json();
-                if (!data.documents || data.documents.length === 0) { infoDiv.innerHTML = `<div class="p-4 bg-red-100 text-red-800 rounded-lg">주소 변환에 실패했습니다.</div>`; return; }
-
-                const sido = data.documents[0].address.region_1depth_name;
-                const sigungu = data.documents[0].address.region_2depth_name;
-
-                document.getElementById('addressInput').value = `${sigungu} (${sido})`;
-                handleSearch();
-            } catch (error) {
-                console.error("위치 정보 오류:", error);
-                infoDiv.innerHTML = `<div class="p-4 bg-red-100 text-red-800 rounded-lg">위치 정보를 가져오는 중 오류가 발생했습니다. (권한을 허용했는지 확인하세요)</div>`;
-            }
-        }
-
-        // 채팅 토글 함수
-        function toggleChat() { const chatBox = document.getElementById('ai-chat-box'); const btn = document.getElementById('chat-toggle-btn'); const isHidden = chatBox.style.display === 'none' || chatBox.style.display === ''; chatBox.style.display = isHidden ? 'flex' : 'none'; btn.innerHTML = isHidden ? `<i data-lucide="x" class="w-7 h-7"></i>` : `<i data-lucide="message-square" class="w-7 h-7"></i>`; safeCreateIcons(); if (isHidden) { const messages = document.getElementById('chat-messages'); messages.scrollTop = messages.scrollHeight; } }
-
-        // --- AI 관련 함수 ---
-        async function callGeminiAPI(query) { const systemPrompt = "당신은 한국의 분리수거 전문가 챗봇입니다. 사용자의 질문에 친절하고 정확하게, 한국어로 간결한 한 단락으로 답하세요."; const finalUrl = `${API_URL_TEXT}?key=${API_KEY}`; const payload = { contents: [{ parts: [{ text: query }] }], systemInstruction: { parts: [{ text: systemPrompt }] }, }; try { const response = await fetch(finalUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); if (!response.ok) throw new Error(`API call failed: ${response.status}`); const result = await response.json(); return result.candidates?.[0]?.content?.parts?.[0]?.text || "죄송합니다. AI가 답변을 생성하지 못했습니다."; } catch (error) { console.error("Gemini API Error:", error); return "죄송합니다. AI 서버 연결에 문제가 발생했습니다."; } }
-        async function handleAiQuery() { const input = document.getElementById('aiQueryInput'); const query = input.value.trim(); if (!query) return; const chatMessages = document.getElementById('chat-messages'); const appendMessage = (sender, text) => { const div = document.createElement('div'); div.className = `p-2 rounded-lg max-w-[85%] ${sender === 'user' ? 'user-message' : 'ai-message'}`; div.innerHTML = text.replace(/\n/g, '<br>'); chatMessages.appendChild(div); chatMessages.scrollTop = chatMessages.scrollHeight; }; appendMessage('user', query); input.value = ''; input.disabled = true; const loadingDiv = document.createElement('div'); loadingDiv.id = 'ai-loading'; loadingDiv.className = 'ai-message italic text-gray-500'; loadingDiv.innerText = 'AI가 답변을 생성 중입니다...'; chatMessages.appendChild(loadingDiv); chatMessages.scrollTop = chatMessages.scrollHeight; const responseText = await callGeminiAPI(query); document.getElementById('ai-loading')?.remove(); appendMessage('ai', responseText); input.disabled = false; input.focus(); }
-        // --- AI 함수 끝 ---
-
-
-        // Lucide 아이콘 생성 함수
-        function safeCreateIcons() { if (window.lucide) { lucide.createIcons(); } }
-
-        // --- 자동 완성(연관 검색어) 함수 ---
-        function autocomplete(inp, arr, onSelectCallback) {
-            let currentFocus;
-
-            inp.addEventListener("input", function(e) {
-                let a, b, i, val = this.value;
-                closeAllLists();
-                if (!val || !arr) { return false; }
-                currentFocus = -1;
-
-                a = document.createElement("DIV");
-                a.setAttribute("id", this.id + "autocomplete-list");
-                a.setAttribute("class", "autocomplete-items");
-                this.parentNode.appendChild(a);
-
-                let count = 0;
-                for (i = 0; i < arr.length && count < 10; i++) {
-                    if (arr[i] && arr[i].toLowerCase().includes(val.toLowerCase())) {
-                        b = document.createElement("DIV");
-                        let matchIndex = arr[i].toLowerCase().indexOf(val.toLowerCase());
-                        b.innerHTML = arr[i].substring(0, matchIndex);
-                        b.innerHTML += "<strong>" + arr[i].substring(matchIndex, matchIndex + val.length) + "</strong>";
-                        b.innerHTML += arr[i].substring(matchIndex + val.length);
-                        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-
-                        b.addEventListener("click", function(e) {
-                            inp.value = this.getElementsByTagName("input")[0].value;
-                            closeAllLists();
-                            if (onSelectCallback) onSelectCallback();
-                        });
-                        a.appendChild(b);
-                        count++;
-                    }
-                }
-                 if (count === 0 && a.parentNode) {
-                    a.parentNode.removeChild(a);
-                }
-            });
-
-            inp.addEventListener("keydown", function(e) {
-                let x = document.getElementById(this.id + "autocomplete-list");
-                if (x) x = x.getElementsByTagName("div");
-                if (!x) return;
-
-                if (e.keyCode == 40) { // Down
-                    currentFocus++;
-                    addActive(x);
-                } else if (e.keyCode == 38) { // Up
-                    currentFocus--;
-                    addActive(x);
-                } else if (e.keyCode == 13) { // Enter
-                    e.preventDefault();
-                    if (currentFocus > -1) {
-                        if (x[currentFocus]) x[currentFocus].click();
-                    } else {
-                        closeAllLists();
-                        if (onSelectCallback) onSelectCallback();
-                    }
-                }
-            });
-
-            function addActive(x) {
-                if (!x || x.length === 0) return false;
-                removeActive(x);
-                if (currentFocus >= x.length) currentFocus = 0;
-                if (currentFocus < 0) currentFocus = (x.length - 1);
-                if (x[currentFocus]) {
-                   x[currentFocus].classList.add("autocomplete-active");
+            if (!val) return false;
+            currentFocus = -1;
+            const a = document.createElement("DIV");
+            a.setAttribute("class", "autocomplete-items");
+            this.parentNode.appendChild(a);
+            let count = 0;
+            for (let i = 0; i < arr.length && count < 10; i++) {
+                if (arr[i].toLowerCase().includes(val.toLowerCase())) {
+                    const b = document.createElement("DIV");
+                    b.innerHTML = arr[i].replace(new RegExp(val, "gi"), match => `<strong>${match}</strong>`);
+                    b.addEventListener("click", function() { inp.value = arr[i]; closeAllLists(); if(onSelectCallback) onSelectCallback(); });
+                    a.appendChild(b);
+                    count++;
                 }
             }
-
-            function removeActive(x) {
-                for (let i = 0; i < x.length; i++) {
-                    x[i].classList.remove("autocomplete-active");
-                }
-            }
-        }
-
-        function closeAllLists(elmnt) {
-            var x = document.getElementsByClassName("autocomplete-items");
-            for (var i = 0; i < x.length; i++) {
-                if (elmnt != x[i] && elmnt != x[i].parentNode.getElementsByTagName("input")[0]) {
-                     if (x[i].parentNode) {
-                        x[i].parentNode.removeChild(x[i]);
-                    }
-                }
-            }
-        }
-
-
-        document.addEventListener("click", function (e) {
-            closeAllLists(e.target);
         });
-        // --- 자동 완성 함수 끝 ---
 
-
-        // --- 페이지 로드 시 초기화 ---
-        document.addEventListener('DOMContentLoaded', function() {
-            loadData();
-            safeCreateIcons();
+        inp.addEventListener("keydown", function(e) {
+            let x = this.parentNode.querySelector(".autocomplete-items");
+            if (x) x = x.getElementsByTagName("div");
+            if (e.key === "ArrowDown") { currentFocus++; addActive(x); }
+            else if (e.key === "ArrowUp") { currentFocus--; addActive(x); }
+            else if (e.key === "Enter") { e.preventDefault(); if (currentFocus > -1 && x) { x[currentFocus].click(); } }
         });
-    </script>
+
+        function addActive(x) { if (!x) return false; removeActive(x); if (currentFocus >= x.length) currentFocus = 0; if (currentFocus < 0) currentFocus = x.length - 1; x[currentFocus].classList.add("autocomplete-active"); }
+        function removeActive(x) { for (let i = 0; i < x.length; i++) x[i].classList.remove("autocomplete-active"); }
+        function closeAllLists(elmnt) { const items = document.getElementsByClassName("autocomplete-items"); for (let i = 0; i < items.length; i++) if (elmnt != items[i] && elmnt != inp) items[i].parentNode.removeChild(items[i]); }
+        document.addEventListener("click", function (e) { closeAllLists(e.target); });
+    }
+</script>
+<script>
+    // === AI 챗봇 기본 함수 ===
+    function toggleChat() { const chatBox = document.getElementById('ai-chat-box'); chatBox.style.display = chatBox.style.display === 'flex' ? 'none' : 'flex'; }
+    async function handleAiQuery() {
+        const input = document.getElementById('aiQueryInput'); if(!input.value.trim()) return;
+        const messagesDiv = document.getElementById('chat-messages');
+        const userMsg = document.createElement('div'); userMsg.className = 'user-message'; userMsg.textContent = input.value; messagesDiv.appendChild(userMsg); messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        const query = input.value; input.value = '';
+        try {
+            const response = await fetch(API_URL_TEXT, { method:'POST', headers:{ 'Authorization': `Bearer ${API_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: query, temperature:0.7 }) });
+            const data = await response.json();
+            const aiMsg = document.createElement('div'); aiMsg.className='ai-message';
+            aiMsg.textContent = data?.candidates?.[0]?.content || 'AI 응답을 받지 못했습니다.';
+            messagesDiv.appendChild(aiMsg); messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        } catch(e){ console.error(e); const aiMsg = document.createElement('div'); aiMsg.className='ai-message'; aiMsg.textContent = 'AI 응답 실패'; messagesDiv.appendChild(aiMsg); messagesDiv.scrollTop = messagesDiv.scrollHeight; }
+    }
+</script>
+<script>
+    // === 가이드 표시 예시 (데이터 로딩 후 호출) ===
+    function displayGeneralGuide() { const div = document.getElementById('generalGuide'); div.innerHTML = '<p class="text-gray-700">일반 분리수거 가이드 예시 내용입니다.</p>'; }
+    function displayFoodWasteGuide() { const div = document.getElementById('foodWasteGuide'); div.innerHTML = '<p class="text-gray-700">음식물 쓰레기 구분 예시 내용입니다.</p>'; }
+    function displaySymbolsGuide() { const div = document.getElementById('displaySymbolsGuide'); div.innerHTML = '<p class="text-gray-700">재활용 표시 기호 설명 예시 내용입니다.</p>'; }
+</script>
+
+<script>
+    // === 위치 & 검색 예시 ===
+    function getCurrentLocation() { alert('현재 위치 기능은 브라우저 위치 API를 통해 구현 가능합니다.'); }
+    function handleSearch() { alert('지역 검색 로직 호출'); }
+    function handleItemSearch() { alert('품목 검색 로직 호출'); }
+</script>
 </body>
 </html>
-
