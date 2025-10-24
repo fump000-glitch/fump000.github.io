@@ -98,7 +98,7 @@
         <div id="disposalInfo" class="mt-8 space-y-6">
             <div id="infoMessage" class="p-4 bg-blue-100 text-blue-800 rounded-lg border border-blue-200">
                 <p><b>시/도</b>를 선택하고 <b>시/군/구</b>를 입력하거나 '현재 위치'를 눌러 배출 정보를 확인하세요.<br>
-                   또는, 시/도를 '전국'으로 선택하고 상세 지역명(예: 성안동)으로 검색할 수 있습니다.</p>
+                   또는, 시/도를 '전국'으로 선택하고 상세 지역명(예: 소룡동)으로 검색할 수 있습니다.</p>
             </div>
         </div>
   <div class="space-y-4 mt-12 p-6 bg-gray-50 rounded-lg border">
@@ -447,193 +447,169 @@ OTHER,Other (복합재질),아더 (혼합 플라스틱),"두 가지 이상의 �
 
             // (신규) '지자체링크' (업로드된 "지자체링크.xlsx - Sheet1.csv" 파일 내용)
             '지자체링크': `시도명,시군구명,url
-강원특별자치도,강릉시,https://www.gn.go.kr/www/contents.do?key=528
-강원특별자치도,동해시,https://www.dh.go.kr/www/contents.do?key=261
-강원특별자치도,삼척시,https://www.samcheok.go.kr/www/contents.do?key=523
-강원특별자치도,속초시,https://www.sokcho.go.kr/portal/wnetr/wasteSearch
-강원특별자치도,원주시,https://www.wonju.go.kr/www/contents.do?key=740
-강원특별자치도,춘천시,https://www.city.chuncheon.go.kr/www/contents.do?key=648
-강원특별자치도,태백시,https://www.taebaek.go.kr/www/contents.do?key=710
-강원특별자치도,고성군,https://www.goseong.go.kr/www/contents.do?key=1016
-강원특별자치도,양구군,https://www.yanggu.go.kr/www/contents.do?key=701
-강원특별자치도,양양군,https://www.yangyang.go.kr/www/contents.do?key=585
-강원특별자치도,영월군,https://www.yw.go.kr/www/contents.do?key=708
-강원특별자치도,인제군,https://www.inje.go.kr/www/contents.do?key=642
-강원특별자치도,정선군,https://www.jeongseon.go.kr/www/contents.do?key=700
-강원특별자치도,철원군,https://www.cwg.go.kr/www/contents.do?key=559
-강원특별자치도,평창군,https://www.pc.go.kr/www/contents.do?key=685
-강원특별자치도,홍천군,https://www.hongcheon.go.kr/www/contents.do?key=655
-강원특별자치도,화천군,https://www.hwacheon.go.kr/www/contents.do?key=620
-강원특별자치도,횡성군,https://www.hsg.go.kr/www/contents.do?key=576
-경기도,수원시,https://www.suwon.go.kr/sw-www/www/main/main.do
-경기도,성남시,https://www.seongnam.go.kr/main.do
-경기도,용인시,https://www.yongin.go.kr/home/www/main.do
-경기도,안양시,https://www.anyang.go.kr/main/index.do
-경기도,안산시,https://www.ansan.go.kr/www/index.do
-경기도,과천시,https://www.gccity.go.kr/main/index.do
-경기도,광명시,https://www.gm.go.kr/pt/index.do
-경기도,광주시,https://www.gjcity.go.kr/www/index.do
-경기도,군포시,https://www.gunpo.go.kr/www/index.do
-경기도,부천시,https://www.bucheon.go.kr/site/main/index.do
-경기도,시흥시,https://www.siheung.go.kr/
-경기도,김포시,https://www.gimpo.go.kr/www/index.do
-경기도,안성시,https://www.anseong.go.kr/main.do
-경기도,오산시,https://www.osan.go.kr/main.do
-경기도,의왕시,https://www.uiwang.go.kr/main.do
-경기도,이천시,https://www.icheon.go.kr/portal/index.do
-경기도,평택시,https://www.pyeongtaek.go.kr/main.do
-경기도,하남시,https://www.hanam.go.kr/www/index.do
-경기도,화성시,https://www.hscity.go.kr/www/index.do
-경기도,여주시,https://www.yeoju.go.kr/main.do
-경기도,양평군,https://www.yp21.go.kr/www/index.do
-경기도,고양시,https://www.goyang.go.kr/www/index.do
-경기도,구리시,https://www.guri.go.kr/www/index.do
-경기도,남양주시,https://www.nyj.go.kr/main.go
-경기도,동두천시,https://www.ddc.go.kr/ddc/index.do
-경기도,양주시,https://www.yangju.go.kr/www/index.do
-경기도,의정부시,https://www.ui4u.go.kr/portal/main.do
-경기도,파주시,https://www.paju.go.kr/www/index.do
-경기도,포천시,https://www.pocheon.go.kr/www/index.do
-경기도,연천군,https://www.yeoncheon.go.kr/www/index.do
-경기도,가평군,https://www.gp.go.kr/portal/index.do
-경상남도,창원시,https://www.changwon.go.kr/portal/main/main.do
-경상남도,김해시,https://www.gimhae.go.kr/main.do
-경상남도,진주시,https://www.jinju.go.kr/main.do
-경상남도,양산시,https://www.yangsan.go.kr/main.do
-경상남도,거제시,https://www.geoje.go.kr/index.geoje
-경상남도,통영시,https://www.tongyeong.go.kr/main.do
-경상남도,사천시,https://www.sacheon.go.kr/www/index.do
-경상남도,밀양시,https://www.miryang.go.kr/main.do
-경상남도,함안군,https://www.haman.go.kr/main.do
-경상남도,거창군,https://www.geochang.go.kr/main.do
-경상남도,창녕군,https://www.cng.go.kr/main.do
-경상남도,고성군,https://www.goseong.go.kr/index.goseong
-경상남도,하동군,https://www.hadong.go.kr/main.do
-경상남도,합천군,https://www.hc.go.kr/www/index.do
-경상남도,남해군,https://www.namhae.go.kr/main.do
-경상남도,함양군,https://www.hygn.go.kr/www/index.do
-경상남도,산청군,https://www.sancheong.go.kr/www/index.do
-경상남도,의령군,https://www.uiryeong.go.kr/index.uiryeong
-경상북도,포항시,https://www.pohang.go.kr/
-경상북도,경주시,https://www.gyeongju.go.kr/www/index.do
-경상북도,김천시,https://www.gc.go.kr/www/index.do
-경상북도,안동시,https://www.andong.go.kr/main.do
-경상북도,구미시,https://www.gumi.go.kr/www/index.do
-경상북도,영주시,https://www.yeongju.go.kr/open_content/main/
-경상북도,영천시,https://www.yc.go.kr/www/index.do
-경상북도,상주시,https://www.sangju.go.kr/www/index.do
-경상북도,문경시,https://www.gbmg.go.kr/www/index.do
-경상북도,경산시,https://www.gbgs.go.kr/www/index.do
-경상북도,군위군,https://www.gunwi.go.kr/www/index.do
-경상북도,의성군,https://www.usc.go.kr/www/index.do
-경상북도,청송군,https://www.cs.go.kr/www/index.do
-경상북도,영양군,https://www.yyg.go.kr/www/index.do
-경상북도,영덕군,https://www.yd.go.kr/www/index.do
-경상북도,청도군,https://www.cheongdo.go.kr/open.content/ko/
-경상북도,고령군,https://www.goryeong.go.kr/main.do
-경상북도,성주군,https://www.sj.go.kr/www/index.do
-경상북도,칠곡군,https://www.chilgok.go.kr/www/index.do
-경상북도,예천군,https://www.ycg.kr/www/index.do
-경상북도,봉화군,https://www.bonghwa.go.kr/open.content/ko/
-경상북도,울진군,https://www.uljin.go.kr/index.uljin
-경상북도,울릉군,https://www.ulleung.go.kr/www/index.do
-광주광역시,광산구,https://www.gwangsan.go.kr/www/index.do
-광주광역시,북구,https://bukgu.gwangju.kr/
-광주광역시,서구,https://seogu.gwangju.kr/
-광주광역시,남구,https://namgu.gwangju.kr/
-광주광역시,동구,https://donggu.gwangju.kr/
-대구광역시,중구,https://www.jung.daegu.kr/new/
-대구광역시,동구,https://www.dong.daegu.kr/
-대구광역시,서구,https://www.seo.daegu.kr/
-대구광역시,남구,https://www.nam.daegu.kr/
-대구광역시,북구,https://www.buk.daegu.kr/
-대구광역시,수성구,https://www.suseong.kr/
-대구광역시,달서구,https://www.dalseo.daegu.kr/
-대구광역시,달성군,https://www.dalseong.daegu.kr/
-대전광역시,중구,https://www.djjunggu.go.kr/
-대전광역시,동구,https://www.donggu.go.kr/
-대전광역시,서구,https://www.seogu.go.kr/
-대전광역시,유성구,https://www.yuseong.go.kr/
-대전광역시,대덕구,https://www.daedeok.go.kr/
-부산광역시,중구,https://www.bsjunggu.go.kr/
-부산광역시,서구,https://www.bsseogu.go.kr/
-부산광역시,동구,https://www.bsdonggu.go.kr/
-부산광역시,영도구,https://www.yeongdo.go.kr/
-부산광역시,부산진구,https://www.busanjin.go.kr/
-부산광역시,동래구,https://www.dongnae.go.kr/
-부산광역시,남구,https://www.bsnamgu.go.kr/
-부산광역시,북구,https://www.bsbukgu.go.kr/
-부산광역시,해운대구,https://www.haeundae.go.kr/
-부산광역시,사하구,https://www.saha.go.kr/
-부산광역시,금정구,https://www.geumjeong.go.kr/
-부산광역시,강서구,https://www.bsgangseo.go.kr/
-부산광역시,연제구,https://www.yeonje.go.kr/
-부산광역시,수영구,https://www.suyeong.go.kr/
-부산광역시,사상구,https://www.sasang.go.kr/
-부산광역시,기장군,https://www.gijang.go.kr/
-서울특별시,종로구,https://www.jongno.go.kr/
-서울특별시,중구,https://www.junggu.seoul.kr/
-서울특별시,용산구,https://www.yongsan.go.kr/
-서울특별시,성동구,https://www.sd.go.kr/
-서울특별시,광진구,https://www.gwangjin.go.kr/
-서울특별시,동대문구,https://www.ddm.go.kr/
-서울특별시,중랑구,https://www.jungnang.go.kr/
-서울특별시,성북구,https://www.sb.go.kr/
-서울특별시,강북구,https://www.gangbuk.go.kr/
-서울특별시,도봉구,https://www.dobong.go.kr/
-서울특별시,노원구,https://www.nowon.kr/
-서울특별시,은평구,https://www.ep.go.kr/
-서울특별시,서대문구,https://www.sdm.go.kr/
-서울특별시,마포구,https://www.mapo.go.kr/
-서울특별시,양천구,https://www.yangcheon.go.kr/
-서울특별시,강서구,https://www.gangseo.seoul.kr/
-서울특별시,구로구,https://www.guro.go.kr/
-서울특별시,금천구,https://www.geumcheon.go.kr/
-서울특별시,영등포구,https://www.ydp.go.kr/
-서울특별시,동작구,https://www.dongjak.go.kr/
-서울특별시,관악구,https://www.gwanak.go.kr/
-서울특별시,서초구,https://www.seocho.go.kr/
-서울특별시,강남구,https://www.gangnam.go.kr/
-서울특별시,송파구,https://www.songpa.go.kr/
-서울특별시,강동구,https://www.gangdong.go.kr/
-세종특별자치시,세종시,https://www.sejong.go.kr/www/contents.do?key=648
-울산광역시,중구,https://www.junggu.ulsan.kr/
-울산광역시,남구,https://www.ulsannamgu.go.kr/
-울산광역시,동구,https://www.donggu.ulsan.kr/
-울산광역시,북구,https://www.bukgu.ulsan.kr/
-울산광역시,울주군,https://www.ulju.ulsan.kr/
-인천광역시,중구,https://www.icjg.go.kr/
-인천광역시,동구,https://www.icdonggu.go.kr/
-인천광역시,미추홀구,https://www.michu.incheon.kr/
-인천광역시,연수구,https://www.yeonsu.go.kr/
-인천광역시,남동구,https://www.namdong.go.kr/
-인천광역시,부평구,https://www.icbp.go.kr/
-인천광역시,계양구,https://www.gyeyang.go.kr/
-인천광역시,서구,https://www.seo.incheon.kr/
-인천광역시,강화군,https://www.ganghwa.go.kr/
-인천광역시,옹진군,https://www.ongjin.go.kr/
-전라남도,목포시,https://www.mokpo.go.kr/www/contents.do?key=698
-전라남도,여수시,https://www.yeosu.go.kr/www/contents.do?key=1010
-전라남도,순천시,https://www.suncheon.go.kr/kr/contents.do?key=416
-전라남도,나주시,https://www.naju.go.kr/www/contents.do?key=522
-전라남도,광양시,https://www.gwangyang.go.kr/www/contents.do?key=549
-전라남도,담양군,https://www.damyang.go.kr/www/contents.do?key=666
-전라남도,곡성군,https://www.gokseong.go.kr/www/contents.do?key=585
-전라남도,구례군,https://www.gurye.go.kr/www/contents.do?key=612
-전라남도,고흥군,https://www.goheung.go.kr/www/contents.do?key=541
-전라남도,보성군,https://www.boseong.go.kr/www/contents.do?key=604
-전라남도,화순군,https://www.hwasun.go.kr/www/contents.do?key=583
-전라남도,장흥군,https://www.jangheung.go.kr/www/contents.do?key=615
-전라남도,강진군,https://www.gangjin.go.kr/www/contents.do?key=602
-전라남도,해남군,https://www.haenam.go.kr/www/contents.do?key=589
-전라남도,영암군,https://www.yeongam.go.kr/www/contents.do?key=570
-전라남도,무안군,https://www.muan.go.kr/www/contents.do?key=584
-전라남도,함평군,https://www.hampyeong.go.kr/www/contents.do?key=592
-전라남도,영광군,https://www.yeonggwang.go.kr/www/contents.do?key=613
-전라남도,장성군,https://www.jangseong.go.kr/www/contents.do?key=605
-전라남도,완도군,https://www.wando.go.kr/www/contents.do?key=662
-전라남도,진도군,https://www.jindo.go.kr/www/contents.do?key=604
-전라남도,신안군,https://www.shinan.go.kr/www/contents.do?key=638
+서울특별시,서울특별시,https://news.seoul.go.kr/env/archives/558699
+서울특별시,종로구,https://xn--oy2b29bd3a601b.kr/front/support/bannerCollection.do#city01
+서울특별시,중구,https://www.junggu.seoul.kr/content.do?cmsid=16513
+서울특별시,용산구,https://www.yongsan.go.kr/portal/main/contents.do?menuNo=200680
+서울특별시,성동구,https://www.sd.go.kr/main/contents.do?key=1674&
+서울특별시,광진구,https://www.gwangjin.go.kr/portal/main/contents.do?menuNo=200838
+서울특별시,동대문구,https://www.ddm.go.kr/www/contents.do?key=860
+서울특별시,중량구,https://www.jungnang.go.kr/portal/bbs/list/B0000522.do?menuNo=201471
+서울특별시,성북구,https://www.sb.go.kr/www/selectBbsNttView.do?key=5927&bbsNo=91&nttNo=9502169&searchCnd=all&searchKrwd=&integrDeptCode=&pageIndex=1
+서울특별시,강북구,https://www.gangbuk.go.kr/portal/bbs/B0000089/list.do?menuNo=200294
+서울특별시,도봉구,https://www.dobong.go.kr/subsite/waste/Contents.asp?code=10007358
+서울특별시,노원구,https://www.nowon.kr/www/info/info5/minwon4_03/minwon4_03_04.jsp
+서울특별시,은평구,https://www.ep.go.kr/www/contents.do?key=1239
+서울특별시,서대문구,https://www.sdm.go.kr/civil/type/household.do
+서울특별시,마포구,https://www.mapo.go.kr/site/main/content/mapo05060501
+서울특별시,양천구,https://www.yangcheon.go.kr/site/yangcheon/ex/bbs/List.do?cbIdx=279
+서울특별시,강서구,https://www.gangseo.seoul.kr/env/env010101
+서울특별시,구로구,https://www.guro.go.kr/www/contents.do?key=2694&
+서울특별시,금천구,https://www.geumcheon.go.kr/portal/contents.do?key=812
+서울특별시,영등포구,https://www.ydp.go.kr/www/contents.do?key=2733&
+서울특별시,동작구,https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200589
+서울특별시,관악구,https://www.gwanak.go.kr/site/gwanak/07/10703010100002016051206.jsp
+서울특별시,서초구,https://www.seocho.go.kr/site/seocho/04/10411010600002018030711.jsp
+서울특별시,강남구,https://clean.gangnam.go.kr/
+서울특별시,송파구,https://www.songpa.go.kr/www/contents.do?key=3153&
+서울특별시,강동구,https://www.gangdong.go.kr/web/newportal/contents/gdp_005_004_010_001
+부산광역시,부산광역시,https://www.busan.go.kr/depart/ahwastepolicy09
+부산광역시,중구,https://www.bsjunggu.go.kr/index.junggu?menuCd=DOM_000000109001001009
+부산광역시,서구,https://www.bsseogu.go.kr/index.bsseogu?menuCd=DOM_000000102004002006&cpath=
+부산광역시,동구,https://www.bsdonggu.go.kr/index.donggu?menuCd=DOM_000000104005002000
+부산광역시,영도구,https://www.yeongdo.go.kr/00672/01898/00863.web
+부산광역시,부산진구,https://www.busanjin.go.kr/index.busanjin?menuCd=DOM_000000105006002003
+부산광역시,동래구,https://www.dongnae.go.kr/index.dongnae?menuCd=DOM_000000105009001004
+부산광역시,남구,https://www.bsnamgu.go.kr/index.namgu?menuCd=DOM_000003501001002000
+부산광역시,북구,https://www.bsbukgu.go.kr/index.bsbukgu?menuCd=DOM_000000103005001003&cpath=
+부산광역시,해운대구,https://www.haeundae.go.kr/index.do?menuCd=DOM_000000102014004000
+부산광역시,사하구,https://www.saha.go.kr/portal/contents.do?mId=0405050000
+부산광역시,금정구,https://www.geumjeong.go.kr/index.geumj?menuCd=DOM_000000133007000000
+부산광역시,강서구,https://www.bsgangseo.go.kr/portal/contents.do?mid=0304010100
+부산광역시,연제구,https://www.yeonje.go.kr/portal/contents.do?mId=0602020100
+부산광역시,수영구,https://www.suyeong.go.kr/index.suyeong?menuCd=DOM_000000205003000000
+부산광역시,사상구,https://www.sasang.go.kr/index.sasang?menuCd=DOM_000000110001001000
+부산광역시,기장군,https://www.gijang.go.kr/index.gijang?menuCd=DOM_000000104006001000
+대구광역시,대구광역시,https://www.daegu.go.kr/env/index.do?menu_id=00001319
+대구광역시,중구,https://www.jung.daegu.kr/new/pages/information/page.html?mc=2307
+대구광역시,동구,https://dong.daegu.kr/portal/contents.do?mid=0405130000
+대구광역시,서구,https://www.dgs.go.kr/portal/contents.do?mid=0207090000
+대구광역시,남구,https://nam.daegu.kr/index.do?menu_id=00000777
+대구광역시,북구,https://www.buk.daegu.kr/index.do?menu_id=00001791
+대구광역시,수성구,https://www.suseong.kr/index.do?menu_id=00000359&servletPath=%2Findex.do
+대구광역시,달서구,https://www.dalseo.daegu.kr/index.do?menu_id=00001251&servletPath=%2Findex.do
+대구광역시,달성군,https://www.dalseong.daegu.kr/index.do?menu_id=00000365&servletPath=%2Findex.do
+대구광역시,군위군,https://www.gunwi.go.kr/ko/page.do?mnu_uid=223&
+인천광역시,인천광역시,https://www.incheon.go.kr/recycle/index
+인천광역시,강화군,https://www.ganghwa.go.kr/open_content/main/part/clean/detritus.jsp
+인천광역시,옹진군,https://www.ongjin.go.kr/open_content/main/environment/cleaning/excretion.jsp
+인천광역시,중구,https://www.icjg.go.kr/krpt0401c
+인천광역시,동구,https://www.icdonggu.go.kr/main/area/clean/waste_living.jsp
+인천광역시,미추홀구,https://www.michuhol.go.kr/main/content.do?sq=443
+인천광역시,연수구,https://www.yeonsu.go.kr/main/part/clean/house.asp
+인천광역시,남동구,https://www.namdong.go.kr/main/area/clean/garbage.jsp
+인천광역시,부평구,https://www.icbp.go.kr/main/life/clean/disposables_workplaces.jsp
+인천광역시,계양구,https://www.gyeyang.go.kr/open_content/main/part/clean/detritus.jsp
+인천광역시,서구,https://www.seo.incheon.kr/open_content/main/part/clean/detritus.jsp
+광주광역시,광주광역시,https://www.gwangju.go.kr/envi/contentsView.do?pageId=envi246#
+광주광역시,동구,https://www.donggu.kr/menu.es?mid=a10408010100
+광주광역시,서구,https://www.seogu.gwangju.kr/menu.es?mid=a10308010100
+광주광역시,남구,https://www.namgu.gwangju.kr/menu.es?mid=a10501050000
+광주광역시,북구,https://bukgu.gwangju.kr/menu.es?mid=a10406020300
+광주광역시,광산구,https://www.gwangsan.go.kr/contentsView.do?pageId=www832
+대전광역시,대전광역시,https://www.daejeon.go.kr/drh/DrhContentsHtmlView.do?menuSeq=2194
+대전광역시,동구,https://www.donggu.go.kr/dg/kor/contents/618
+대전광역시,중구,https://www.djjunggu.go.kr/kr/sub06_05_09_01.do
+대전광역시,서구,https://www.seogu.go.kr/kor/sub06_11_01_01.do
+대전광역시,유성구,https://www.yuseong.go.kr/kor/sub07_11_03_01.do
+대전광역시,대덕구,https://www.daedeok.go.kr/was/goContents.do?link=/was/was01/WAS0102&menuId=WAS0102
+울산광역시,울산광역시,https://www.ulsan.go.kr/u/envi/contents.ulsan?mId=001005002001000000
+울산광역시,중구,https://www.junggu.ulsan.kr/index.ulsan?menuCd=DOM_000000105005013001
+울산광역시,남구,https://www.ulsannamgu.go.kr/easyMain/mainPage.do?p=eco
+울산광역시,동구,https://www.donggu.ulsan.kr/donggu/contents/contents.do?mId=7050101
+울산광역시,북구,https://www.bukgu.ulsan.kr/lay1/S1T192C208/contents.do
+울산광역시,울주군,https://www.ulju.ulsan.kr/ulju/contents.do?mId=0505010100
+세종특별자치시,세종특별자치시,https://www.sejong.go.kr/recycle/index.do
+세종특별자치시,세종시,https://www.sejong.go.kr/recycle/sub03_01_01_01.do
+경기도,경기도,https://www.gg.go.kr/bbs/boardView.do?bsIdx=678&bIdx=83538&page=1&menuId=1966&bcIdx=0
+경기도,수원시,https://www.suwon.go.kr/sw-www/deptHome/dep_env/env_03/env_03_11/env_03_01.jsp
+경기도,성남시,https://recycle.seongnam.go.kr/platforminfo
+경기도,의정부시,https://www.ui4u.go.kr/depart/contents.do?mId=0602030000
+경기도,안양시,https://www.anyang.go.kr/main/contents.do?key=806
+경기도,부천시,https://www.bucheon.go.kr/site/homepage/menu/viewMenu?menuid=148006007006003
+경기도,광명시,https://www.gm.go.kr/pt/partInfo/en/cleaning/lfgarbage/PTMN217.jsp
+경기도,평택시,https://www.pyeongtaek.go.kr/depart/contents.do?mId=0801030000
+경기도,동두천시,https://www.ddc.go.kr/ddc/contents.do?key=489
+경기도,안산시,https://www.ansan.go.kr/www/common/cntnts/selectContents.do?cntnts_id=C0001357
+경기도,고양시,https://www.goyang.go.kr/www/www03/www03_3/www03_3_2/www03_3_2_tab1.jsp
+경기도,과천시,https://www.gccity.go.kr/dept/contents.do?mId=0604030100
+경기도,구리시,https://www.guri.go.kr/www/contents.do?key=765
+경기도,남양주시,https://www.nyj.go.kr/www/contents.do?key=3004
+경기도,오산시,https://www.osan.go.kr/depart/contents.do?mId=0602030000
+경기도,시흥시,http://waste.siheung.go.kr/
+경기도,군포시,https://www.gunpo.go.kr/www/contents.do?key=4527
+경기도,의왕시,http://www.uiwang.go.kr/UWKORENV0312
+경기도,하남시,https://www.hanam.go.kr/www/contents.do?key=6421
+경기도,용인시,https://www.yongin.go.kr/home/www/www12/www12_08/www12_08_03/www12_08_03_03.jsp
+경기도,파주시,https://www.paju.go.kr/www/www_02/environment/environment_05/environment_05_01/environment_05_01_02.jsp
+경기도,이천시,https://www.icheon.go.kr/depart/contents.do?mid=0504020000
+경기도,안성시,https://www.anseong.go.kr/depart/contents.do?mId=0702010000
+경기도,김포시,https://www.gimpo.go.kr/portal/contents.do?key=2723
+경기도,화성시,https://www.hscity.go.kr/www/partInfo/trnsportEnvrn/trashProcessInfo.jsp
+경기도,광주시,https://www.gjcity.go.kr/depart/contents.do?mId=0901010100
+경기도,양주시,http://www.yangju.go.kr/site/yangju/sub.do?Key=356
+경기도,포천시,https://www.pocheon.go.kr/www/contents.do?key=4595
+경기도,여주시,https://www.yeoju.go.kr/www/contents.do?key=565
+경기도,연천군,https://www.yeoncheon.go.kr/www/contents.do?key=3503
+경기도,가평군,http://www.gp.go.kr/portal/contents.do?key=676
+경기도,양평군,https://www.yp21.go.kr/www/contents.do?key=1458
+제주특별자치도,제주특별자치도,https://www.jeju.go.kr/nature/environment/reform.htm
+제주특별자치도,제주시,https://www.jejusi.go.kr/field/life.do
+제주특별자치도,서귀포시,https://www.seogwipo.go.kr/recycle/index.htm
+강원특별자치도,춘천시,https://www.chuncheon.go.kr/cityhall/living-info/clean-environment/waste-discharge/general/
+강원특별자치도,원주시,https://www.wonju.go.kr/www/contents.do?key=543&
+강원특별자치도,강릉시,https://www.gn.go.kr/www/contents.do?key=466
+강원특별자치도,동해시,https://www.dh.go.kr/www/contents.do?key=790
+강원특별자치도,태백시,https://www.taebaek.go.kr/www/contents.do?key=1615
+강원특별자치도,속초시,https://www.sokcho.go.kr/sc/fields/environment/waste/disposal
+강원특별자치도,삼척시,https://www.samcheok.go.kr/specialty/00469/03294.web
+강원특별자치도,홍천군,https://www.hongcheon.go.kr/www/contents.do?key=627
+강원특별자치도,횡성군,https://www.hsg.go.kr/www/contents.do?key=1310
+강원특별자치도,영월군,https://www.yw.go.kr/www/selectBbsNttList.do?bbsNo=44&key=473
+강원특별자치도,평창군,https://www.pc.go.kr/portal/part/environment/waste
+강원특별자치도,정선군,https://www.jeongseon.go.kr/portal/partinfo/environment_forest/waste/separationguide
+강원특별자치도,철원군,https://www.cwg.go.kr/www/contents.do?key=426
+강원특별자치도,화천군,https://www.ihc.go.kr/www/contents.do?key=298
+강원특별자치도,양구군,https://www.yanggu.go.kr/user_sub?gfnc=www&mu_idx=525
+강원특별자치도,인제군,https://www.inje.go.kr/portal
+강원특별자치도,고성군,https://www.gwgs.go.kr/kor/sub02_0804.do
+강원특별자치도,양양군,https://www.yangyang.go.kr/gw/portal/yyc_partinfo_envi_recy
+충청북도,청주시,https://www.cheongju.go.kr/www/contents.do?key=428
+충청북도,충주시,https://www.chungju.go.kr/www/contents.do?key=3069
+충청북도,제천시,https://www.jecheon.go.kr/www/contents.do?key=497
+충청북도,보은군,https://www.boeun.go.kr/www/contents.do?key=1431
+충청북도,옥천군,https://www.oc.go.kr/www/contents.do?key=337&
+충청북도,영동군,https://www.yd21.go.kr/kr/html/sub05/05060301.html
+충청북도,증평군,https://www.jp.go.kr/kor/sub05_07_01.do
+충청북도,진천군,https://www.jincheon.go.kr/site/environment/sub.do?menukey=1517
+충청북도,괴산군,https://www.goesan.go.kr/trenv/contents.do?key=421
+충청북도,음성군,https://www.eumseong.go.kr/www/contents.do?key=72
+충청북도,단양군,https://www.danyang.go.kr/dy21/856
+충청남도,천안시,https://www.cheonan.go.kr/kor/sub06_13_06.do
+충청남도,공주시,https://www.gongju.go.kr/kr/sub06_08_06_01.do
+충청남도,당진시,https://www.dangjin.go.kr/kor/sub05_06_04_01.do
+충청남도,보령시,https://www.brcn.go.kr/kor/sub05_07_08.do
+충청남도,아산시,https://www.asan.go.kr/main/cms/?no=293
+충청남도,서산시,https://www.seosan.go.kr/www/contents.do?key=1566
+충청남도,논산시,https://nonsan.go.kr/kor/html/sub05/05081101.html
+충청남도,계룡시,https://gyeryong.go.kr/kr/html/sub05/05051401.html
+충청남도,금산군,https://www.geumsan.go.kr/kr/html/sub05/05050601.html
+충청남도,부여군,https://www.buyeo.go.kr/html/kr/refo/refo_06040401.html
+충청남도,서천군,https://www.seocheon.go.kr/kor/sub07_04_04_02.do
+충청남도,청양군,https://www.cheongyang.go.kr/kor/sub06_04_03.do
+충청남도,홍성군,https://www.hongseong.go.kr/kor/sub05_090204.do
+충청남도,예산군,https://www.yesan.go.kr/kor/sub06_10_06.do
+충청남도,태안군,https://www.taean.go.kr/life/sub04_08.do
 전북특별자치도,전주시,https://www.jeonju.go.kr/index.9is?contentUid=ff8080818990c349018b041acc483bef
 전북특별자치도,군산시,https://www.gunsan.go.kr/main/m250
 전북특별자치도,익산시,https://www.iksan.go.kr/index.iksan?menuCd=DOM_000002015002000000
@@ -648,34 +624,68 @@ OTHER,Other (복합재질),아더 (혼합 플라스틱),"두 가지 이상의 �
 전북특별자치도,순창군,https://www.sunchang.go.kr/index.sunchang?menuCd=DOM_000000105004003002
 전북특별자치도,고창군,https://www.gochang.go.kr/index.gochang?menuCd=DOM_000000104004001000
 전북특별자치도,부안군,https://www.buan.go.kr/index.buan?menuCd=DOM_000000104008009000
-제주특별자치도,제주시,https://www.jejusi.go.kr/waste/index.do
-제주특별자치도,서귀포시,https://www.seogwipo.go.kr/field/living/waste.htm
-충청남도,천안시,https://www.cheonan.go.kr/www/contents.do?key=643
-충청남도,공주시,https://www.gongju.go.kr/www/contents.do?key=671
-충청남도,보령시,https://www.brcn.go.kr/www/contents.do?key=670
-충청남도,아산시,https://www.asan.go.kr/main/cms/HTML/001/006/001/sub.html
-충청남도,서산시,https://www.seosan.go.kr/www/contents.do?key=698
-충청남도,논산시,https://www.nonsan.go.kr/www/contents.do?key=641
-충청남도,계룡시,https://www.gyeryong.go.kr/www/contents.do?key=635
-충청남도,당진시,https://www.dangjin.go.kr/www/contents.do?key=740
-충청남도,금산군,https://www.geumsan.go.kr/www/contents.do?key=606
-충청남도,부여군,https://www.buyeo.go.kr/www/contents.do?key=641
-충청남도,서천군,https://www.seocheon.go.kr/www/contents.do?key=592
-충청남도,청양군,https://www.cheongyang.go.kr/www/contents.do?key=617
-충청남도,홍성군,https://www.hongseong.go.kr/www/contents.do?key=650
-충청남도,예산군,https://www.yesan.go.kr/www/contents.do?key=610
-충청남도,태안군,https://www.taean.go.kr/www/contents.do?key=606
-충청북도,청주시,https://www.cheongju.go.kr/www/contents.do?key=617
-충청북도,충주시,https://www.chungju.go.kr/www/contents.do?key=664
-충청북도,제천시,https://www.jecheon.go.kr/www/contents.do?key=1921
-충청북도,보은군,https://www.boeun.go.kr/www/contents.do?key=648
-충청북도,옥천군,https://www.oc.go.kr/www/contents.do?key=585
-충청북도,영동군,https://www.yd21.go.kr/www/contents.do?key=640
-충청북도,증평군,https://www.jp.go.kr/www/contents.do?key=585
-충청북도,진천군,https://www.jincheon.go.kr/www/contents.do?key=612
-충청북도,괴산군,https://www.goesan.go.kr/www/contents.do?key=628
-충청북도,음성군,https://www.eumseong.go.kr/www/contents.do?key=617
-충청북도,단양군,https://www.danyang.go.kr/www/contents.do?key=638`,
+전라남도,목포시,https://www.mokpo.go.kr/www/life_welfare/environmental_info/waste_garbage
+전라남도,여수시,https://www.yeosu.go.kr/www/sphere/environ/waste
+전라남도,순천시,https://www.suncheon.go.kr/kr/life/0002/0001/
+전라남도,나주시,https://www.naju.go.kr/www/field_info/environment/waste_new
+전라남도,광양시,https://gwangyang.go.kr/menu.es?mid=a11205090101
+전라남도,담양군,https://www.damyang.go.kr/menu/goToContentsPage?domainId=DOM_0000001&menuCd=DOM_000000190004007000&contentsSid=91&activeSid=93
+전라남도,곡성군,https://www.gokseong.go.kr/kr/subPage.do?menuNo=103004002003
+전라남도,구례군,https://www.gurye.go.kr/kr/subPage.do?menuNo=117004005001
+전라남도,고흥군,https://www.goheung.go.kr/environmental/contentsView.do?pageId=environmental16
+전라남도,보성군,https://www.boseong.go.kr/www/open_data/environment/regular_payment
+전라남도,화순군,https://www.hwasun.go.kr/contents.do?S=S01&M=060804010000
+전라남도,장흥군,https://www.jangheung.go.kr/www/open_data/life_environment/separate_collection
+전라남도,강진군,https://www.gangjin.go.kr/www/part/environment/wastes
+전라남도,해남군,https://www.haenam.go.kr/index.9is?contentUid=8ae590de8dcaf22e018dce5a947c2121
+전라남도,영암군,https://www.yeongam.go.kr/home/www/info_area/life_env/life_env_01/life_env_01_05/yeongam.go
+전라남도,무안군,https://www.muan.go.kr/www/information/environment_facilities/recycling
+전라남도,함평군,https://www.hampyeong.go.kr/boardList.do?boardId=GARBAGE_DISPOSAL&pageId=www653
+전라남도,영광군,https://www.yeonggwang.go.kr/subpage/?site=headquarter_new&mn=9117
+전라남도,장성군,https://www.jangseong.go.kr/home/www/openinfo/environment/environment_21
+전라남도,완도군,https://www.wando.go.kr/wando/sub.cs?m=548
+전라남도,진도군,https://www.jindo.go.kr/home/sub.cs?m=334
+전라남도,신안군,https://www.shinan.go.kr/home/www/dept_info/env/waste/page.wscms
+경상북도,포항시,https://www.pohang.go.kr/dept/contents.do?mid=0202010000
+경상북도,경주시,https://www.gyeongju.go.kr/area/page.do?mnu_uid=1012&
+경상북도,김천시,https://www.gc.go.kr/portal/contents.do?mId=1414030000
+경상북도,안동시,https://www.andong.go.kr/portal/contents.do?mId=0607030000
+경상북도,구미시,https://www.gumi.go.kr/life/contents.do?mid=0401060000
+경상북도,영주시,https://www.yeongju.go.kr/open_content/main/page.do?mnu_uid=10513&
+경상북도,영천시,https://www.yc.go.kr/depart/contents.do?mId=0505010000
+경상북도,상주시,https://www.sangju.go.kr/civil/page/16450/11064.tc
+경상북도,문경시,https://www.gbmg.go.kr/portal/contents.do?mId=0606040101
+경상북도,경산시,https://www.gbgs.go.kr/open_content/ko/page.do?mnu_uid=2219&
+경상북도,의성군,https://www.usc.go.kr/ko/page.do?mnu_uid=565&
+경상북도,청송군,https://www.cs.go.kr/specialty/00003172/00003282.web
+경상북도,영양군,https://www.yyg.go.kr/www/welfare/life_info/waste_discharge
+경상북도,영덕군,https://www.yd.go.kr/?p=604
+경상북도,청도군,https://www.cheongdo.go.kr/environmental/contents.do?mid=0201000000
+경상북도,고령군,https://www.goryeong.go.kr/kor/contents.do?IDX=266
+경상북도,성주군,https://www.sj.go.kr/page.do?mnu_uid=3952&
+경상북도,칠곡군,https://www.chilgok.go.kr/portal/contents.do?mId=1108010100
+경상북도,예천군,https://www.ycg.kr/open.content/ko/section/environment/environment/
+경상북도,봉화군,https://www.bonghwa.go.kr/open.content/ko/welfare/environment/recycling.info/
+경상북도,울진군,https://www.uljin.go.kr/index.uljin?menuCd=DOM_000000106003001001
+경상북도,울릉군,https://www.ulleung.go.kr/ko/page.do?mnu_uid=1580&
+경상남도,창원시,https://www.changwon.go.kr/cwportal/depart/11065/11084/13076.web
+경상남도,진주시,https://www.jinju.go.kr/00134/00615/00868.web
+경상남도,통영시,https://www.tongyeong.go.kr/00973/01112/01983.web
+경상남도,사천시,https://www.sacheon.go.kr/life/00330/01776.web
+경상남도,김해시,https://www.gimhae.go.kr/01544/02643/01736.web
+경상남도,밀양시,https://www.miryang.go.kr/web/index.do?mnNo=50201010000
+경상남도,거제시,https://www.geoje.go.kr/index.geoje?menuCd=DOM_000008906012001011&cpath=
+경상남도,양산시,https://www.yangsan.go.kr/portal/contents.do?mid=0608010000
+경상남도,의령군,https://www.uiryeong.go.kr/index.uiryeong?menuCd=DOM_000000204008002000
+경상남도,함안군,https://www.haman.go.kr/01651/01653/01709.web
+경상남도,창녕군,https://www.cng.go.kr/00599/01290/01292.web
+경상남도,고성군,https://www.goseong.go.kr/environment/index.goseong?menuCd=DOM_000000903001000000
+경상남도,남해군,https://www.namhae.go.kr/depart/Index.do?c=DE0702010000
+경상남도,하동군,https://www.hadong.go.kr/specialty/00219/00474.web
+경상남도,산청군,https://www.sancheong.go.kr/www/contents.do?key=297
+경상남도,함양군,https://www.hygn.go.kr/01666/01933/01965.web
+경상남도,거창군,https://www.geochang.go.kr/00608/00749/00769.web
+경상남도,합천군,https://www.hc.go.kr/05754/06019/06039.web`,
 
              // (신규) '강원특별자치도' (업로드된 "지역정보.xlsx - 강원특별자치도.csv" 파일 내용)
             '강원특별자치도': `시도명,시군구명,관리구역대상지역명,생활쓰레기배출방법,음식물쓰레기배출방법,재활용품배출방법,생활쓰레기배출요일,생활쓰레기배출시작시각,생활쓰레기배출종료시각,음식물쓰레기배출요일,음식물쓰레기배출시작시각,음식물쓰레기배출종료시각,재활용품배출요일,재활용품배출시작시각,재활용품배출종료시각,관리부서명,관리부서전화번호
@@ -1014,8 +1024,37 @@ OTHER,Other (복합재질),아더 (혼합 플라스틱),"두 가지 이상의 �
             displaySymbolsGuide();
         }
 
-        // 1번 기능: 검색 결과 표시 함수
-        function displayDisposalInfo(results, address) { const infoDiv = document.getElementById('disposalInfo'); infoDiv.innerHTML = ''; if (results.length === 0) { infoDiv.innerHTML = `<div class="p-4 bg-red-100 text-red-800 border-red-200 rounded-lg"><h3 class="text-xl font-bold mb-2 flex items-center"><i data-lucide="x-circle" class="w-5 h-5 mr-2"></i> 검색 결과 없음</h3><p>입력하신 <b>'${address}'</b>에 대한 정보를 찾을 수 없습니다. 철자를 확인해주세요.</p></div>`; safeCreateIcons(); return; } let html = ''; for (const data of results) { if (data.isLinkOnly) { html += `<div class="p-4 bg-yellow-100 text-yellow-800 border-yellow-200 rounded-lg"><h3 class="text-xl font-bold mb-2 flex items-center"><i data-lucide="alert-triangle" class="w-5 h-5 mr-2"></i> ${data['시군구명']} 공식 링크</h3><p>상세 배출 정보는 없지만, <b>${data['시군구명']}</b>의 공식 페이지에서 정보를 확인 할 수 있습니다.</p><a href="${data['url']}" target="_blank" class="text-blue-600 hover:underline font-semibold flex items-center mt-2"><i data-lucide="external-link" class="w-4 h-4 mr-1"></i> ${data['시군구명']} 쓰레기 배출 안내 페이지</a></div>`; } else { const cleanDays = (days) => (days || '정보 없음').replace(/\+/g, ', '); const contact = data['관리부서전화번호'] ? `<a href="tel:${data['관리부서전화번호']}" class="text-blue-600 hover:underline">${data['관리부서전화번호']}</a>` : '정보 없음'; const linkData = dataStore['지자체링크']; const linkMatch = linkData.find(l => l['시군구명'] === data['시군구명'] && l['시도명'] === data['시도명']); const officialLink = linkMatch ? `<p class="text-sm mt-2"><a href="${linkMatch.url}" target="_blank" rel="noopener noreferrer" class="font-semibold text-blue-600 hover:underline">공식 지자체 안내 페이지 바로가기</a></p>` : ''; const subTitle = data['관리구역대상지역명'].includes('전역') || data['관리구역대상지역명'].includes('전지역') ? '' : `(${data['관리구역대상지역명']})`; const formatTime = (time) => time ? time : '정보 없음'; html += `<div class="p-4 bg-green-100 text-green-800 border-green-200 rounded-lg space-y-4"><h3 class="text-xl font-bold flex items-center"><i data-lucide="check-circle" class="w-5 h-5 mr-2"></i> ${data['시군구명']} ${subTitle} 배출 정보</h3><div class="result-table overflow-x-auto"><table class="w-full table-fixed"><thead class="bg-gray-200/50"><tr><th class="w-1/6">구분</th><th class="w-1/4">배출 요일</th><th class="w-1/6">시작</th><th class="w-1/6">종료</th><th class="w-1/4">배출 방법</th></tr></thead><tbody><tr><td class="font-semibold">생활</td><td>${cleanDays(data['생활쓰레기배출요일'])}</td><td>${formatTime(data['생활쓰레기배출시작시각'])}</td><td>${formatTime(data['생활쓰레기배출종료시각'])}</td><td>${data['생활쓰레기배출방법'] || '정보 없음'}</td></tr><tr><td class="font-semibold">음식물</td><td>${cleanDays(data['음식물쓰레기배출요일'])}</td><td>${formatTime(data['음식물쓰레기배출시작시각'])}</td><td>${formatTime(data['음식물쓰레기배출종료시각'])}</td><td>${data['음식물쓰레기배출방법'] || '정보 없음'}</td></tr><tr><td class="font-semibold">재활용</td><td>${cleanDays(data['재활용품배출요일'])}</td><td>${formatTime(data['재활용품배출시작시각'])}</td><td>${formatTime(data['재활용품배출종료시각'])}</td><td>${data['재활용품배출방법'] || '정보 없음'}</td></tr></tbody></table></div><div class="mt-4 p-3 bg-white rounded-lg border text-gray-700"><p class="text-sm"><b>관리 부서:</b> ${data['관리부서명'] || '정보 없음'} | <b>연락처:</b> ${contact}</p>${officialLink}</div></div>`; } } infoDiv.innerHTML = html; safeCreateIcons(); }
+      
+// 1번 기능: 검색 결과 표시 함수 
+        function displayDisposalInfo(results, address) {
+            const infoDiv = document.getElementById('disposalInfo');
+            infoDiv.innerHTML = '';
+            if (results.length === 0) {
+                infoDiv.innerHTML = `<div class="p-4 bg-red-100 text-red-800 border-red-200 rounded-lg"><h3 class="text-xl font-bold mb-2 flex items-center"><i data-lucide="x-circle" class="w-5 h-5 mr-2"></i> 검색 결과 없음</h3><p>입력하신 <b>'${address}'</b>에 대한 정보를 찾을 수 없습니다. 철자를 확인해주세요.</p></div>`;
+                safeCreateIcons();
+                return;
+            }
+            let html = '';
+            for (const data of results) {
+                if (data.isLinkOnly) {
+                    // [수정] 공식 링크 카드 제목에도 (시도명) 추가
+                    html += `<div class="p-4 bg-yellow-100 text-yellow-800 border-yellow-200 rounded-lg"><h3 class="text-xl font-bold mb-2 flex items-center"><i data-lucide="alert-triangle" class="w-5 h-5 mr-2"></i> ${data['시군구명']} (${data['시도명']}) 공식 링크</h3><p>상세 배출 정보는 없지만, <b>${data['시군구명']}</b>의 공식 페이지에서 정보를 확인 할 수 있습니다.</p><a href="${data['url']}" target="_blank" class="text-blue-600 hover:underline font-semibold flex items-center mt-2"><i data-lucide="external-link" class="w-4 h-4 mr-1"></i> ${data['시군구명']} 쓰레기 배출 안내 페이지</a></div>`;
+                } else {
+                    const cleanDays = (days) => (days || '정보 없음').replace(/\+/g, ', ');
+                    const contact = data['관리부서전화번호'] ? `<a href="tel:${data['관리부서전화번호']}" class="text-blue-600 hover:underline">${data['관리부서전화번호']}</a>` : '정보 없음';
+                    const linkData = dataStore['지자체링크'];
+                    const linkMatch = linkData.find(l => l['시군구명'] === data['시군구명'] && l['시도명'] === data['시도명']);
+                    const officialLink = linkMatch ? `<p class="text-sm mt-2"><a href="${linkMatch.url}" target="_blank" rel="noopener noreferrer" class="font-semibold text-blue-600 hover:underline">공식 지자체 안내 페이지 바로가기</a></p>` : '';
+                    const subTitle = data['관리구역대상지역명'].includes('전역') || data['관리구역대상지역명'].includes('전지역') ? '' : `(${data['관리구역대상지역명']})`;
+                    const formatTime = (time) => time ? time : '정보 없음';
+                    
+                
+                    html += `<div class="p-4 bg-green-100 text-green-800 border-green-200 rounded-lg space-y-4"><h3 class="text-xl font-bold flex items-center"><i data-lucide="check-circle" class="w-5 h-5 mr-2"></i> ${data['시군구명']} (${data['시도명']}) ${subTitle} 배출 정보</h3><div class="result-table overflow-x-auto"><table class="w-full table-fixed"><thead class="bg-gray-200/50"><tr><th class="w-1/6">구분</th><th class="w-1/4">배출 요일</th><th class="w-1/6">시작</th><th class="w-1/6">종료</th><th class="w-1/4">배출 방법</th></tr></thead><tbody><tr><td class="font-semibold">생활</td><td>${cleanDays(data['생활쓰레기배출요일'])}</td><td>${formatTime(data['생활쓰레기배출시작시각'])}</td><td>${formatTime(data['생활쓰레기배출종료시각'])}</td><td>${data['생활쓰레기배출방법'] || '정보 없음'}</td></tr><tr><td class="font-semibold">음식물</td><td>${cleanDays(data['음식물쓰레기배출요일'])}</td><td>${formatTime(data['음식물쓰레기배출시작시각'])}</td><td>${formatTime(data['음식물쓰레기배출종료시각'])}</td><td>${data['음식물쓰레기배출방법'] || '정보 없음'}</td></tr><tr><td class="font-semibold">재활용</td><td>${cleanDays(data['재활용품배출요일'])}</td><td>${formatTime(data['재활용품배출시작시각'])}</td><td>${formatTime(data['재활용품배출종료시각'])}</td><td>${data['재활용품배출방법'] || '정보 없음'}</td></tr></tbody></table></div><div class="mt-4 p-3 bg-white rounded-lg border text-gray-700"><p class="text-sm"><b>관리 부서:</b> ${data['관리부서명'] || '정보 없음'} | <b>연락처:</b> ${contact}</p>${officialLink}</div></div>`;
+                }
+            }
+            infoDiv.innerHTML = html;
+            safeCreateIcons();
+        }
 
         // 3번 기능: 일반 가이드 표시 함수
         function displayGeneralGuide() { const guideDiv = document.getElementById('generalGuide'); const data = dataStore['분리수거방법']; if (!data || data.length === 0) { guideDiv.innerHTML = '<p class="text-red-500 text-sm">가이드 데이터를 불러오지 못했습니다.</p>'; return; } let html = ''; const categories = data.reduce((acc, item) => { const category = item['구분'] || '기타'; if (!acc[category]) acc[category] = []; acc[category].push(item); return acc; }, {}); for (const category in categories) { html += `<details><summary><span>${category}</span></summary><div class="content-padding space-y-2">`; categories[category].forEach(item => { html += `<details><summary><span>${item['항목']}</span></summary><div class="guide-item-content"><p><b>배출 방법:</b> ${item['배출 방법']}</p><p><b>참고 사항:</b> ${item['참고 사항'] || '없음'}</p></div></details>`; }); html += `</div></details>`; } guideDiv.innerHTML = html; safeCreateIcons(); }
@@ -1027,19 +1066,37 @@ OTHER,Other (복합재질),아더 (혼합 플라스틱),"두 가지 이상의 �
         function displaySymbolsGuide() { const guideDiv = document.getElementById('displaySymbolsGuide'); const data = dataStore['표시구분']; if (!data || data.length === 0) { guideDiv.innerHTML = '<p class="text-red-500 text-sm">표시 구분 데이터를 불러오지 못했습니다.</p>'; return; } let html = ''; data.forEach(item => { html += `<details><summary><span>${item['약어']} (${item['한글명']})</span></summary><div class="symbol-content"><strong>${item['영문명']}</strong><br>${item['특징']}<br><strong>예시:</strong> ${item['예시']}<br><strong>재활용:</strong> ${item['재활용']}</div></details>`; }); guideDiv.innerHTML = html; safeCreateIcons(); }
 
         // 1번 기능: 지역 데이터 검색 함수 ('전국' 검색 로직 포함)
-        function searchRegionalData(province, address) {
+function searchRegionalData(province, address) {
             if (province === '전국') {
+                // [수정 시작]
+                let searchSigungu = address; // 기본값은 입력값
+                let searchSido = "";         // 기본값은 없음
+                
+                // "시군구명 (시도명)" 형식을 분리하는 정규식
+                const match = address.match(/(.+)\s\((.+)\)/); 
+                if (match && match.length === 3) {
+                    searchSigungu = match[1]; // "중구"
+                    searchSido = match[2];    // "부산광역시"
+                }
+
                 const allMatches = [];
-                for (const provKey in ALL_CITIES_DATA) {
+                for (const provKey in ALL_CITIES_DATA) { // provKey는 '서울특별시', '부산광역시' 등
                     const regionData = dataStore[provKey];
                     if (!regionData) continue;
-                    const foundItems = regionData.filter(item =>
-                        (item['시군구명'] && item['시군구명'].includes(address)) ||
-                        (item['관리구역대상지역명'] && item['관리구역대상지역명'].includes(address))
-                    );
-                    allMatches.push(...foundItems);
+
+                    // 1. searchSido가 비어있으면 (예: 그냥 '중구' 입력) 모든 시/도를 검색
+                    // 2. searchSido가 있으면(예: '부산광역시') provKey와 일치할 때만 검색
+                    if (searchSido === "" || provKey === searchSido) {
+                        const foundItems = regionData.filter(item =>
+                            // [수정] 'address' 대신 'searchSigungu'로 검색
+                            (item['시군구명'] && item['시군구명'].includes(searchSigungu)) ||
+                            (item['관리구역대상지역명'] && item['관리구역대상지역명'].includes(searchSigungu))
+                        );
+                        allMatches.push(...foundItems);
+                    }
                 }
                 return allMatches;
+                // [수정 끝]
             } else {
                 const regionData = dataStore[province];
                 if (!regionData) return [];
@@ -1263,22 +1320,42 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     // ✅ 주소 자동완성 초기화 (시도 선택 시마다 업데이트)
-    function updateAddressAutocomplete(province) {
-        // 전북특별자치도와 전라북도 모두 커버
-        let key = province;
-        if (province === "전라북도") key = "전북특별자치도";
-        if (province === "전북특별자치도") key = "전북특별자치도";
+function updateAddressAutocomplete(province) {
+            // ... (중략) ...
+            let currentAddressList; // [수정] = ALL_CITIES_DATA[key] || []; 부분 제거
 
-        // 해당 시도의 도시 목록 가져오기
-        let currentAddressList = ALL_CITIES_DATA[key] || [];
+            // 전국 선택 시 모든 지역명 병합
+            if (province === "전국") {
+                // [수정 시작]
+                currentAddressList = [];
+                const addedCities = new Set(); // 상세 지역 데이터(동/읍/면) 중복 제거용
+                ALL_PROVINCES.forEach(provName => {
+                    const regionData = dataStore[provName]; // '서울특별시' 등의 원본 데이터
+                    if (regionData) {
+                        regionData.forEach(item => {
+                            const sigungu = item['시군구명'];
+                            const sido = item['시도명'];
+                            // "시군구명 (시도명)" 형식의 고유한 이름을 생성
+                            const uniqueName = `${sigungu} (${sido})`; 
+                            
+                            if (sigungu && sido && !addedCities.has(uniqueName)) {
+                                currentAddressList.push(uniqueName);
+                                addedCities.add(uniqueName);
+                            }
+                        });
+                    }
+                });
+                // [수정 끝]
+            } else {
+                 // [수정] "전국"이 아닐 때의 로직
+                 let key = province;
+                 if (province === "전라북도") key = "전북특별자치도";
+                 if (province === "전북특별자치도") key = "전북특별자치도";
+                 currentAddressList = ALL_CITIES_DATA[key] || [];
+            }
 
-        // 전국 선택 시 모든 지역명 병합
-        if (province === "전국") {
-            currentAddressList = ALL_PROVINCES.flatMap(p => ALL_CITIES_DATA[p] || []);
+            autocomplete(addressInput, currentAddressList, handleSearch);
         }
-
-        autocomplete(addressInput, currentAddressList, handleSearch);
-    }
 
     // 최초 로드 시 기본 시도(선택된 값 기준) 적용
     updateAddressAutocomplete(provinceSelect.value);
